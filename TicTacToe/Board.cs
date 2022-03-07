@@ -46,6 +46,7 @@ namespace TicTacToe
 
         private bool CheckWon()
         {
+            // Check rows for 3 in a row
             for (var i = 0; i < _boardArray.GetLength(0); i++)
             {
                 if (_boardArray[i,0] == _boardArray[i,1] && _boardArray[i,1] == _boardArray[i,2])
@@ -53,6 +54,7 @@ namespace TicTacToe
                     return true;
                 }
             }
+            // Check columns for 3 in a row
             for (var i = 0; i < _boardArray.GetLength(1); i++)
             {
                 if (_boardArray[0,i] == _boardArray[1,i] && _boardArray[1,i] == _boardArray[2,i])
@@ -60,6 +62,13 @@ namespace TicTacToe
                     return true;
                 }
             }
+            
+            // Check forward slash for 3 in a row
+            if (_boardArray[1, 1] == _boardArray[2, 2] && _boardArray[2, 2] == _boardArray[0, 0])
+            {
+                return true;
+            }
+            
 
             return false;
         }
