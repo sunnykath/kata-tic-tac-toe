@@ -53,5 +53,42 @@ namespace TestTicTacToe
             Assert.False(success);
             Assert.Equal(expectedBoard, actualBoard);
         }
+        
+        
+        [Fact]
+        public void Should_Reset_The_Board_Back_To_Its_Initial_State()
+        {
+            // Arrange 
+            var board = new Board();
+            var firstMove = new Move(1, 1, 1);
+            var secondMove = new Move(1, 2, 2);
+            
+            var expectedBoardBeforeReset = new int[3,3]
+            {
+                {1, 2, 0},
+                {0, 0, 0},
+                {0, 0, 0}
+            };
+            
+            var expectedBoardAfterReset = new int[3,3]
+            {
+                {0, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0}
+            };
+
+            // Act
+            var firstMoveSuccess = board.PlaceMarker(firstMove);    
+            var secondMoveSuccess = board.PlaceMarker(secondMove);    
+            var actualBoardBeforeReset = board.GetBoard();
+            board.ResetBoard();
+            var actualBoardAfterReset = board.GetBoard();
+        
+            // Assert
+            Assert.True(firstMoveSuccess);
+            Assert.True(secondMoveSuccess);
+            Assert.Equal(expectedBoardBeforeReset, actualBoardBeforeReset);
+            Assert.Equal(expectedBoardAfterReset, actualBoardAfterReset);
+        }
     }
 }

@@ -45,7 +45,12 @@ namespace TicTacToe
 
         public void ResetBoard()
         {
-            
+            _boardArray = new int[3, 3]
+            {
+                {0, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0}
+            };
         }
         
     }
