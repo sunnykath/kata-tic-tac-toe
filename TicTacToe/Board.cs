@@ -39,9 +39,29 @@ namespace TicTacToe
 
         public GameStatus CheckGameStatus()
         {
-            return GameStatus.Playing;
+            _gameStatus = CheckWon() ? GameStatus.Won : (CheckDraw() ? GameStatus.Draw : GameStatus.Playing);
+            
+            return _gameStatus;
         }
 
+        private bool CheckWon()
+        {
+            for (var i = 0; i < _boardArray.GetLength(0); i++)
+            {
+                if (_boardArray[i,0] == _boardArray[i,1] && _boardArray[i,1] == _boardArray[i,2])
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        private bool CheckDraw()
+        {
+            
+
+            return false;
+        }
 
         public void ResetBoard()
         {
