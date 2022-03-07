@@ -148,7 +148,7 @@ namespace TestTicTacToe
         }
         
         [Fact]
-        public void Should_Return_Won_When_GameStatus_Is_Checked_If_3_In_A_Row_Diagonally()
+        public void Should_Return_Won_When_GameStatus_Is_Checked_If_3_In_A_Row_Diagonally_As_Forward_Slash()
         {
             // Arrange 
             var board = new Board();
