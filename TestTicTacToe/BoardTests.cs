@@ -119,6 +119,34 @@ namespace TestTicTacToe
             Assert.Equal(GameStatus.Won, actualGameStatus);
         }
 
+        [Fact]
+        public void Should_Return_Won_When_GameStatus_Is_Checked_If_3_In_A_Row_Vertically()
+        {
+            // Arrange 
+            var board = new Board();
+            var firstMove = new Move(1, 2, 1);
+            var secondMove = new Move(2, 2, 1);
+            var thirdMove = new Move(3, 2, 1);
+            
+            var expectedBoard = new int[3,3]
+            {
+                {0, 1, 0},
+                {0, 1, 0},
+                {0, 1, 0}
+            };
+
+            // Act
+            board.PlaceMarker(firstMove);    
+            board.PlaceMarker(secondMove);    
+            board.PlaceMarker(thirdMove);    
+            var actualBoard = board.GetBoard();
+            var actualGameStatus = board.CheckGameStatus();
+        
+            // Assert
+            Assert.Equal(expectedBoard, actualBoard);
+            Assert.Equal(GameStatus.Won, actualGameStatus);
+        }
+
         
     }
 }
