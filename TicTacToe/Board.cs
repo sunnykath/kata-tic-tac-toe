@@ -69,6 +69,12 @@ namespace TicTacToe
                 return true;
             }
             
+            // Check Backward Slash for 3 in a row
+            if (_boardArray[1, 1] == _boardArray[2, 0] && _boardArray[2, 0] == _boardArray[0, 2])
+            {
+                return true;
+            }
+            
 
             return false;
         }
