@@ -53,6 +53,13 @@ namespace TicTacToe
                     return true;
                 }
             }
+            for (var i = 0; i < _boardArray.GetLength(1); i++)
+            {
+                if (_boardArray[0,i] == _boardArray[1,i] && _boardArray[1,i] == _boardArray[2,i])
+                {
+                    return true;
+                }
+            }
 
             return false;
         }
