@@ -24,7 +24,15 @@ namespace TicTacToe
         public bool PlaceMarker(Move move)
         {
             var (coordX, coordY) = move.GetCoord();
-            _boardArray[coordX - 1, coordY - 1] = move.GetPlayer();
+
+            if ( _boardArray[coordX - 1, coordY - 1] == 0)
+            {
+                _boardArray[coordX - 1, coordY - 1] = move.GetPlayer();;
+            }
+            else
+            {
+                return false;
+            }
             
             return true;
         }

@@ -50,7 +50,7 @@ namespace TestTicTacToe
             var actualBoard = board.GetBoard();
         
             // Assert
-            Assert.True(success);
+            Assert.False(success);
             Assert.Equal(expectedBoard, actualBoard);
         }
     }
