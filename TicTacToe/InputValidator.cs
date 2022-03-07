@@ -1,10 +1,13 @@
+using System.Text.RegularExpressions;
+
 namespace TicTacToe
 {
-    public class InputValidator
+    public static class InputValidator
     {
-        public bool CheckInput(string regex, string input)
+        public static bool CheckInput(string regexInput, string input)
         {
-            return false;
+            var validRegex = new Regex(regexInput);
+            return validRegex.IsMatch(input);
         }
     }
 }
