@@ -2,18 +2,31 @@ namespace TicTacToe
 {
     public class Board
     {
-        private int[,] _board = new int[3,3];
+        private int[,] _boardArray;
         private GameStatus _gameStatus;
         
         public Board()
         {
             _gameStatus = GameStatus.Playing;
+            _boardArray = new int[3, 3]
+            {
+                {0, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0}
+            };
         }
 
-
-        public bool PlaceMarker()
+        public int[,] GetBoard()
         {
-            return false;
+            return _boardArray;
+        }
+
+        public bool PlaceMarker(Move move)
+        {
+            var (coordX, coordY) = move.GetCoord();
+            _boardArray[coordX - 1, coordY - 1] = move.GetPlayer();
+            
+            return true;
         }
 
         public GameStatus CheckGameStatus()
