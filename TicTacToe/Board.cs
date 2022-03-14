@@ -3,11 +3,9 @@ namespace TicTacToe
     public class Board
     {
         private int[,] _boardArray;
-        private GameStatus _gameStatus;
         
         public Board()
         {
-            _gameStatus = GameStatus.Playing;
             _boardArray = new int[3, 3]
             {
                 {0, 0, 0},
@@ -21,68 +19,10 @@ namespace TicTacToe
             return _boardArray;
         }
 
-        public bool PlaceMarker(Move move)
+        public void PlaceMarker(Move move)
         {
             var (coordX, coordY) = move.GetCoord();
-
-            if ( _boardArray[coordX - 1, coordY - 1] == 0)
-            {
-                _boardArray[coordX - 1, coordY - 1] = move.GetPlayer();;
-            }
-            else
-            {
-                return false;
-            }
-            
-            return true;
-        }
-
-        public GameStatus CheckGameStatus()
-        {
-            _gameStatus = CheckWon() ? GameStatus.Won : (CheckDraw() ? GameStatus.Draw : GameStatus.Playing);
-            
-            return _gameStatus;
-        }
-
-        private bool CheckWon()
-        {
-            // Check rows for 3 in a row
-            for (var i = 0; i < _boardArray.GetLength(0); i++)
-            {
-                if (_boardArray[i,0] == _boardArray[i,1] && _boardArray[i,1] == _boardArray[i,2])
-                {
-                    return true;
-                }
-            }
-            // Check columns for 3 in a row
-            for (var i = 0; i < _boardArray.GetLength(1); i++)
-            {
-                if (_boardArray[0,i] == _boardArray[1,i] && _boardArray[1,i] == _boardArray[2,i])
-                {
-                    return true;
-                }
-            }
-            
-            // Check forward slash for 3 in a row
-            if (_boardArray[1, 1] == _boardArray[2, 2] && _boardArray[2, 2] == _boardArray[0, 0])
-            {
-                return true;
-            }
-            
-            // Check Backward Slash for 3 in a row
-            if (_boardArray[1, 1] == _boardArray[2, 0] && _boardArray[2, 0] == _boardArray[0, 2])
-            {
-                return true;
-            }
-            
-
-            return false;
-        }
-        private bool CheckDraw()
-        {
-            
-
-            return false;
+            _boardArray[coordX - 1, coordY - 1] = move.GetPlayer();
         }
 
         public void ResetBoard()

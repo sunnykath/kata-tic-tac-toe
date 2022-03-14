@@ -20,11 +20,10 @@ namespace TestTicTacToe
             };
 
             // Act
-            var success = board.PlaceMarker(move);
+            board.PlaceMarker(move);
             var actualBoard = board.GetBoard();
         
             // Assert
-            Assert.True(success);
             Assert.Equal(expectedBoard, actualBoard);
         }
         
@@ -46,11 +45,10 @@ namespace TestTicTacToe
 
             // Act
             board.PlaceMarker(firstMove);    
-            var success = board.PlaceMarker(secondMove);    
+            board.PlaceMarker(secondMove);    
             var actualBoard = board.GetBoard();
         
             // Assert
-            Assert.False(success);
             Assert.Equal(expectedBoard, actualBoard);
         }
         
@@ -78,131 +76,16 @@ namespace TestTicTacToe
             };
 
             // Act
-            var firstMoveSuccess = board.PlaceMarker(firstMove);    
-            var secondMoveSuccess = board.PlaceMarker(secondMove);    
+            board.PlaceMarker(firstMove);    
+            board.PlaceMarker(secondMove);    
             var actualBoardBeforeReset = board.GetBoard();
             board.ResetBoard();
             var actualBoardAfterReset = board.GetBoard();
         
             // Assert
-            Assert.True(firstMoveSuccess);
-            Assert.True(secondMoveSuccess);
             Assert.Equal(expectedBoardBeforeReset, actualBoardBeforeReset);
             Assert.Equal(expectedBoardAfterReset, actualBoardAfterReset);
         }
-        
-        [Fact]
-        public void Should_Return_Won_When_GameStatus_Is_Checked_If_3_In_A_Row_Horizontally()
-        {
-            // Arrange 
-            var board = new Board();
-            var firstMove = new Move(1, 1, 1);
-            var secondMove = new Move(1, 2, 1);
-            var thirdMove = new Move(1, 3, 1);
-            
-            var expectedBoard = new int[3,3]
-            {
-                {1, 1, 1},
-                {0, 0, 0},
-                {0, 0, 0}
-            };
-
-            // Act
-            board.PlaceMarker(firstMove);    
-            board.PlaceMarker(secondMove);    
-            board.PlaceMarker(thirdMove);    
-            var actualBoard = board.GetBoard();
-            var actualGameStatus = board.CheckGameStatus();
-        
-            // Assert
-            Assert.Equal(expectedBoard, actualBoard);
-            Assert.Equal(GameStatus.Won, actualGameStatus);
-        }
-
-        [Fact]
-        public void Should_Return_Won_When_GameStatus_Is_Checked_If_3_In_A_Row_Vertically()
-        {
-            // Arrange 
-            var board = new Board();
-            var firstMove = new Move(1, 2, 1);
-            var secondMove = new Move(2, 2, 1);
-            var thirdMove = new Move(3, 2, 1);
-            
-            var expectedBoard = new int[3,3]
-            {
-                {0, 1, 0},
-                {0, 1, 0},
-                {0, 1, 0}
-            };
-
-            // Act
-            board.PlaceMarker(firstMove);    
-            board.PlaceMarker(secondMove);    
-            board.PlaceMarker(thirdMove);    
-            var actualBoard = board.GetBoard();
-            var actualGameStatus = board.CheckGameStatus();
-        
-            // Assert
-            Assert.Equal(expectedBoard, actualBoard);
-            Assert.Equal(GameStatus.Won, actualGameStatus);
-        }
-        
-        [Fact]
-        public void Should_Return_Won_When_GameStatus_Is_Checked_If_3_In_A_Row_Diagonally_As_Forward_Slash()
-        {
-            // Arrange 
-            var board = new Board();
-            var firstMove = new Move(1, 1, 1);
-            var secondMove = new Move(2, 2, 1);
-            var thirdMove = new Move(3, 3, 1);
-            
-            var expectedBoard = new int[3,3]
-            {
-                {1, 0, 0},
-                {0, 1, 0},
-                {0, 0, 1}
-            };
-
-            // Act
-            board.PlaceMarker(firstMove);    
-            board.PlaceMarker(secondMove);    
-            board.PlaceMarker(thirdMove);    
-            var actualBoard = board.GetBoard();
-            var actualGameStatus = board.CheckGameStatus();
-        
-            // Assert
-            Assert.Equal(expectedBoard, actualBoard);
-            Assert.Equal(GameStatus.Won, actualGameStatus);
-        }
-
-        [Fact]
-        public void Should_Return_Won_When_GameStatus_Is_Checked_If_3_In_A_Row_Diagonally_As_Backward_Slash()
-        {
-            // Arrange 
-            var board = new Board();
-            var firstMove = new Move(1, 3, 1);
-            var secondMove = new Move(2, 2, 1);
-            var thirdMove = new Move(3, 1, 1);
-            
-            var expectedBoard = new int[3,3]
-            {
-                {0, 0, 1},
-                {0, 1, 0},
-                {1, 0, 0}
-            };
-
-            // Act
-            board.PlaceMarker(firstMove);    
-            board.PlaceMarker(secondMove);    
-            board.PlaceMarker(thirdMove);    
-            var actualBoard = board.GetBoard();
-            var actualGameStatus = board.CheckGameStatus();
-        
-            // Assert
-            Assert.Equal(expectedBoard, actualBoard);
-            Assert.Equal(GameStatus.Won, actualGameStatus);
-        }
-
         
     }
 }
