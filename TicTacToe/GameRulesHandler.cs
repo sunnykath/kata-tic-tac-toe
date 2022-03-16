@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace TicTacToe
 {
@@ -6,15 +7,7 @@ namespace TicTacToe
     {
         public static bool HasDrawn(int[,] boardArray)
         {
-            foreach (var cell in boardArray)
-            {
-                if (cell == 0)
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return boardArray.Cast<int>().All(cell => cell != 0);
         }
         
         public static bool HasWon(int[,] boardArray)
