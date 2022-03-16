@@ -2,7 +2,7 @@ namespace TicTacToe
 {
     public interface IUserInput
     {
-        public string GetUserInput();
+        public Move GetPlayerMove(int player);
         public void OutputBoard();
     }
 }
