@@ -6,7 +6,15 @@ namespace TicTacToe
     {
         public static bool HasDrawn(int[,] boardArray)
         {
-            return false;
+            foreach (var cell in boardArray)
+            {
+                if (cell == 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
         
         public static bool HasWon(int[,] boardArray)
