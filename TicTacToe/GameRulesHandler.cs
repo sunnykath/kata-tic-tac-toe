@@ -28,7 +28,7 @@ namespace TicTacToe
         {
             for (var i = 0; i < boardArray.GetLength(1); i++)
             {
-                if (CheckEquivalence(boardArray[0,i], boardArray[1,i], boardArray[2,i]))
+                if (boardArray[0,i] != 0 && CheckEquivalence(boardArray[0,i], boardArray[1,i], boardArray[2,i]))
                 {
                     return true;
                 }
@@ -37,8 +37,8 @@ namespace TicTacToe
         }
         private static bool IsADiagonalWin(int[,] boardArray)
         {
-            return CheckEquivalence(boardArray[1, 1], boardArray[2, 2],boardArray[0, 0]) 
-                   || CheckEquivalence(boardArray[1, 1], boardArray[2, 0], boardArray[0, 2]);
+            return boardArray[1,1] != 0 && (CheckEquivalence(boardArray[1, 1], boardArray[2, 2],boardArray[0, 0]) 
+                                            || CheckEquivalence(boardArray[1, 1], boardArray[2, 0], boardArray[0, 2]));
         }
 
         private static bool CheckEquivalence(int a, int b, int c)
