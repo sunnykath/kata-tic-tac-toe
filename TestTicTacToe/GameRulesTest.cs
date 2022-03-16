@@ -7,7 +7,7 @@ namespace TestTicTacToe
     {
 
         [Fact]
-        public void Should_Return_False_When_3_In_A_Row_Of_Different_Players_Marks()
+        public void Should_Return_False_When_3_In_A_Row_Horizontally_Of_Different_Players_Marks()
         {
             // Arrange
             var gameLosingBoard = new int[3,3]
@@ -24,6 +24,25 @@ namespace TestTicTacToe
             Assert.False(hasWonGame);
         }
         
+        
+        [Fact]
+        public void Should_Return_False_When_3_In_A_Row_Vertically_Of_Different_Players_Marks()
+        {
+            // Arrange 
+            var gameLosingBoard = new int[3,3]
+            {
+                {0, 1, 0},
+                {0, 1, 0},
+                {0, 2, 0}
+            };       
+        
+            // Act
+            var hasWonGame = GameRulesHandler.HasWon(gameLosingBoard);
+        
+            // Assert
+            Assert.False(hasWonGame);
+        }
+
         
         [Fact]
         public void Should_Return_Won_When_GameStatus_Is_Checked_If_3_In_A_Row_Horizontally()
