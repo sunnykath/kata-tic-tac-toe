@@ -83,7 +83,7 @@ namespace TestTicTacToe
         
         
         [Fact]
-        public void Should_Return_Won_When_GameStatus_Is_Checked_If_3_In_A_Row_Horizontally()
+        public void Should_Return_True_When_GameStatus_Is_Checked_If_3_In_A_Row_Horizontally()
         {
             // Arrange
             var gameWinningBoard = new int[3,3]
@@ -101,7 +101,7 @@ namespace TestTicTacToe
         }
         
         [Fact]
-        public void Should_Return_Won_When_GameStatus_Is_Checked_If_3_In_A_Row_Vertically()
+        public void Should_Return_True_When_GameStatus_Is_Checked_If_3_In_A_Row_Vertically()
         {
             // Arrange 
             var gameWinningBoard = new int[3,3]
@@ -121,7 +121,7 @@ namespace TestTicTacToe
         }
         
         [Fact]
-        public void Should_Return_Won_When_GameStatus_Is_Checked_If_3_In_A_Row_Diagonally_As_Forward_Slash()
+        public void Should_Return_True_When_GameStatus_Is_Checked_If_3_In_A_Row_Diagonally_As_Forward_Slash()
         {
             // Arrange 
             var gameWinningBoard = new int[3,3]
@@ -140,7 +140,7 @@ namespace TestTicTacToe
         }
         
         [Fact]
-        public void Should_Return_Won_When_GameStatus_Is_Checked_If_3_In_A_Row_Diagonally_As_Backward_Slash()
+        public void Should_Return_True_When_GameStatus_Is_Checked_If_3_In_A_Row_Diagonally_As_Backward_Slash()
         {
             // Arrange 
             var gameWinningBoard = new int[3,3]
