@@ -28,7 +28,7 @@ namespace TicTacToe
         private static int RandomlyPickPlayerForFirst()
         {
             var rand = new Random();
-            return rand.Next((1));
+            return rand.Next((1)) + 1;
         }
         public void SwapPlayer()   // rule
         {
