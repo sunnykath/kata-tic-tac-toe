@@ -10,7 +10,7 @@ namespace TestTicTacToe
         {
             // Arrange 
             var board = new Board();
-            var move = new Move(1, 1, 1);
+            var move = new Move(1, 1);
             
             var expectedBoard = new int[3,3]
             {
@@ -18,48 +18,22 @@ namespace TestTicTacToe
                 {0, 0, 0},
                 {0, 0, 0}
             };
-
+        
             // Act
-            board.PlaceMarker(move);
+            board.PlaceMarker(move, 1);
             var actualBoard = board.GetBoard();
         
             // Assert
             Assert.Equal(expectedBoard, actualBoard);
         }
-        
-        
-        [Fact]
-        public void Should_Not_Place_Marker_In_The_Position_If_Cell_Not_Empty()
-        {
-            // Arrange 
-            var board = new Board();
-            var firstMove = new Move(1, 1, 1);
-            var secondMove = new Move(1, 1, 2);
-            
-            var expectedBoard = new int[3,3]
-            {
-                {1, 0, 0},
-                {0, 0, 0},
-                {0, 0, 0}
-            };
 
-            // Act
-            board.PlaceMarker(firstMove);    
-            board.PlaceMarker(secondMove);    
-            var actualBoard = board.GetBoard();
-        
-            // Assert
-            Assert.Equal(expectedBoard, actualBoard);
-        }
-        
-        
         [Fact]
         public void Should_Reset_The_Board_Back_To_Its_Initial_State()
         {
             // Arrange 
             var board = new Board();
-            var firstMove = new Move(1, 1, 1);
-            var secondMove = new Move(1, 2, 2);
+            var firstMove = new Move(1, 1);
+            var secondMove = new Move(1, 2);
             
             var expectedBoardBeforeReset = new int[3,3]
             {
@@ -76,8 +50,8 @@ namespace TestTicTacToe
             };
 
             // Act
-            board.PlaceMarker(firstMove);    
-            board.PlaceMarker(secondMove);    
+            board.PlaceMarker(firstMove, 1);    
+            board.PlaceMarker(secondMove, 2);    
             var actualBoardBeforeReset = board.GetBoard();
             board.ResetBoard();
             var actualBoardAfterReset = board.GetBoard();

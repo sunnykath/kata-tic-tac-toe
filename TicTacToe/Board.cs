@@ -19,10 +19,10 @@ namespace TicTacToe
             return _boardArray;
         }
 
-        public void PlaceMarker(Move move)
+        public void PlaceMarker(Move move, int player)
         {
             var (coordX, coordY) = move.GetCoord();
-            _boardArray[coordX - 1, coordY - 1] = move.GetPlayer();
+            _boardArray[coordX - 1, coordY - 1] = player;
         }
 
         public void ResetBoard()
