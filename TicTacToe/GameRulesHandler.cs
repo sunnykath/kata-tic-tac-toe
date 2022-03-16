@@ -17,7 +17,7 @@ namespace TicTacToe
         {
             for (var i = 0; i < boardArray.GetLength(0); i++)
             {
-                if (CheckEquivalence(boardArray[i, 0], boardArray[i, 1], boardArray[i, 2]))
+                if (boardArray[i,0] != 0 && CheckEquivalence(boardArray[i, 0], boardArray[i, 1], boardArray[i, 2]) )
                 {
                     return true;
                 }
