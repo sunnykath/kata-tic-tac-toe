@@ -1,0 +1,50 @@
+using System;
+
+namespace TicTacToe
+{
+    public static class GameRulesHandler
+    {
+        public static bool HasDrawn(int[,] boardArray)
+        {
+            return false;
+        }
+        
+        public static bool HasWon(int[,] boardArray)
+        {
+            return IsARowWin(boardArray) || IsAColumnWin(boardArray) || IsADiagonalWin(boardArray);
+        }
+        private static bool IsARowWin(int[,] boardArray)
+        {
+            for (var i = 0; i < boardArray.GetLength(0); i++)
+            {
+                if (CheckEquivalence(boardArray[i, 0], boardArray[i, 1], boardArray[i, 2]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        private static bool IsAColumnWin(int[,] boardArray)
+        {
+            for (var i = 0; i < boardArray.GetLength(1); i++)
+            {
+                if (CheckEquivalence(boardArray[0,i], boardArray[1,i], boardArray[2,i]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        private static bool IsADiagonalWin(int[,] boardArray)
+        {
+            return CheckEquivalence(boardArray[1, 1], boardArray[2, 2],boardArray[0, 0]) 
+                   || CheckEquivalence(boardArray[1, 1], boardArray[2, 0], boardArray[0, 2]);
+        }
+
+        private static bool CheckEquivalence(int a, int b, int c)
+        {
+            return (a == b) && (b == c);
+        }
+
+    }
+}
