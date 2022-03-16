@@ -175,5 +175,23 @@ namespace TestTicTacToe
             Assert.False(hasDrawnGame);
         }
 
+        [Fact]
+        public void Should_Return_True_When_Checking_For_Draw_With_No_Empty_Cells()
+        {
+            // Arrange 
+            var gameDrawnBoard = new int[3,3]
+            {
+                {1, 2, 1},
+                {2, 2, 1},
+                {1, 1, 2}
+            };
+        
+            // Act
+            var hasDrawnGame = GameRulesHandler.HasDrawn(gameDrawnBoard);
+        
+            // Assert
+            Assert.True(hasDrawnGame);
+        }
+
     }
 }
