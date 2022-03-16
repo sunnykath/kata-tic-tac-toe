@@ -1,14 +1,17 @@
+using System;
+
 namespace TicTacToe
 {
-    public class Game
+    public class GameLoop
     {
         private int _playerTurn;
         private GameStatus _gameStatus;
         private Board _board;
         
-        public Game()
+        public GameLoop()
         {
-            _playerTurn = 1;
+            _board = new Board();
+            _playerTurn = RandomlyPickPlayerForFirst();
         }
 
 
@@ -17,14 +20,19 @@ namespace TicTacToe
             
         }
         
-        private (int, int) GetMove()
+        public int GetPlayer()
         {
-            return (0, 0);
+            return _playerTurn;
         }
-
-        private void SwapPlayer()
+        
+        private static int RandomlyPickPlayerForFirst()
         {
-            
+            var rand = new Random();
+            return rand.Next((1));
+        }
+        public void SwapPlayer()   // rule
+        {
+            _playerTurn = _playerTurn == 1 ? 2 : 1;
         }
 
         private void Completed()
@@ -48,56 +56,14 @@ namespace TicTacToe
         }
         
         
-        public GameStatus CheckGameStatus(Board board)
+        public GameStatus CheckGameStatus()   
         {
-            _gameStatus = HasWon() ? GameStatus.Won : (HasDrawn() ? GameStatus.Draw : GameStatus.Playing);
+            var boardArray = _board.GetBoard();
+            _gameStatus = GameRulesHandler.HasWon(boardArray) ? GameStatus.Won : (GameRulesHandler.HasDrawn(boardArray) ? GameStatus.Draw : GameStatus.Playing);
             
             return _gameStatus;
         }
 
-        private bool HasDrawn()
-        {
-            
-        }
-        
-        private bool HasWon()
-        {
-            var boardArray = _board.GetBoard();
-            return IsARowWin(boardArray) || IsAColumnWin(boardArray) || IsADiagonalWin(boardArray);
-        }
-        private static bool IsARowWin(int[,] boardArray)
-        {
-            for (var i = 0; i < boardArray.GetLength(0); i++)
-            {
-                if (CheckEquivalence(boardArray[i, 0], boardArray[i, 1], boardArray[i, 2]))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        private static bool IsAColumnWin(int[,] boardArray)
-        {
-            for (var i = 0; i < boardArray.GetLength(1); i++)
-            {
-                if (CheckEquivalence(boardArray[0,i], boardArray[1,i], boardArray[2,i]))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        private static bool IsADiagonalWin(int[,] boardArray)
-        {
-            return CheckEquivalence(boardArray[1, 1], boardArray[2, 2],boardArray[0, 0]) 
-                   || CheckEquivalence(boardArray[1, 1], boardArray[2, 0], boardArray[0, 2]);
-        }
-
-        private static bool CheckEquivalence(int a, int b, int c)
-        {
-            return (a == b) && (b == c);
-        }
-        
         
         
     }
