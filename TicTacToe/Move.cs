@@ -4,13 +4,11 @@ namespace TicTacToe
     {
         private readonly int _coordX;
         private readonly int _coordY;
-        private readonly int _player;
 
-        public Move(int coordX, int coordY, int player)
+        public Move(int coordX, int coordY)
         {
             this._coordX = coordX;
             this._coordY = coordY;
-            this._player = player;
         }
 
         public (int, int) GetCoord()
@@ -18,9 +16,11 @@ namespace TicTacToe
             return (_coordX, _coordY);
         }
 
-        public int GetPlayer()
+        public override bool Equals(object? obj)
         {
-            return _player;
+            var otherMoveObject = (Move) obj;
+            
+            return otherMoveObject._coordX == _coordX && otherMoveObject._coordY == _coordY;
         }
     }
 }
