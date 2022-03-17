@@ -11,20 +11,20 @@ namespace TicTacToe
             Console.Write($"Player {player} enter a coord x,y to place your X or enter 'q' to give up: ");
 
             var input = Console.ReadLine();
-            var success = InputValidator.CheckInput(_moveRegex, input);
-            while (!success)
+            var isValidInput = InputValidator.CheckInput(_moveRegex, input);
+            while (!isValidInput)
             {
                 Console.Write("Invalid Input, please try again: ");
                 input = Console.ReadLine();
-                success = InputValidator.CheckInput(_moveRegex, input);
+                isValidInput = InputValidator.CheckInput(_moveRegex, input);
             }
             
             Console.Write("Move accepted, ");
 
-            var inputsStrings = input.Split(',');
-            var inputCoords = inputsStrings.Select(int.Parse).ToList();
+            var inputStrings = input.Split(',');
+            var moveCoords = inputStrings.Select(int.Parse).ToList();
             
-            var inputMove = new Move(inputCoords[0], inputCoords[1]);
+            var inputMove = new Move(moveCoords[0], moveCoords[1]);
             
             return inputMove;
         }
