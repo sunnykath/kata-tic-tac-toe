@@ -8,7 +8,6 @@ namespace TestTicTacToe
     public class UserInputConsoleTests
     {
 
-
         [Fact]
         public void Should_Ask_For_Input_Again_When_Invalid_Input_Is_Given_For_The_Players_Move()
         {

@@ -4,14 +4,14 @@ namespace TicTacToe
 {
     public class GameLoop
     {
-        private int _playerTurn;
+        private int _player;
         private GameStatus _gameStatus;
         private Board _board;
         
         public GameLoop()
         {
             _board = new Board();
-            _playerTurn = RandomlyPickPlayerForFirst();
+            _player = RandomlyPickPlayerForFirst();
         }
 
 
@@ -22,17 +22,17 @@ namespace TicTacToe
         
         public int GetPlayer()
         {
-            return _playerTurn;
+            return _player;
         }
         
         private static int RandomlyPickPlayerForFirst()
         {
             var rand = new Random();
-            return rand.Next((1)) + 1;
+            return rand.Next(Constants.PlayerX, Constants.PlayerO);
         }
         public void SwapPlayer()   // rule
         {
-            _playerTurn = _playerTurn == 1 ? 2 : 1;
+            _player = _player == Constants.PlayerX ? Constants.PlayerO : Constants.PlayerX;
         }
 
         private void Completed()
