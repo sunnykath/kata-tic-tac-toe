@@ -14,7 +14,6 @@ namespace TicTacToe
             _player = RandomlyPickPlayerForFirst();
         }
 
-
         public void Play()
         {
             
@@ -30,7 +29,7 @@ namespace TicTacToe
             var rand = new Random();
             return rand.Next(Constants.PlayerX, Constants.PlayerO);
         }
-        public void SwapPlayer()   // rule
+        public void SwapPlayer()
         {
             _player = _player == Constants.PlayerX ? Constants.PlayerO : Constants.PlayerX;
         }

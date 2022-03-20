@@ -22,9 +22,10 @@ namespace TestTicTacToe
             Console.SetIn(stringReader);
             
             var uiConsole = new UserInputConsole();
+            var player = Constants.PlayerO;
             
             // Act
-            uiConsole.GetPlayerMove(1);
+            uiConsole.GetPlayerInput(player);
             var actualString = stringWriter.ToString();
             
             // Assert
@@ -48,9 +49,12 @@ namespace TestTicTacToe
             var expectedMove = new Move(1, 2);
             
             var uiConsole = new UserInputConsole();
+
+            var player = Constants.PlayerO;
             
             // Act
-            var actualMove = uiConsole.GetPlayerMove(1);
+            uiConsole.GetPlayerInput(player);
+            var actualMove = uiConsole.GetPlayerMove();
             var actualString = stringWriter.ToString();
             
             // Assert
