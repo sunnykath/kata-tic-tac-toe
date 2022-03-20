@@ -63,6 +63,34 @@ namespace TestTicTacToe
             
         }
         
+        [Fact]
+        public void Should_Return_True_For_Given_Up_When_Player_Inputs_q()
+        {
+            
+            // Arrange
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            var expectedStringContains = "has given up";
+            
+            var stringReader = new StringReader("q");
+            Console.SetIn(stringReader);
+
+            var uiConsole = new UserInputConsole();
+
+            var player = Constants.PlayerO;
+            
+            // Act
+            uiConsole.GetPlayerInput(player);
+            var hasGivenUp = uiConsole.PlayerHasGivenUp();
+            var actualString = stringWriter.ToString();
+            
+            // Assert
+            Assert.True(actualString.Contains(expectedStringContains));
+            Assert.True(hasGivenUp);
+            
+        }
+
         
     }
 }
