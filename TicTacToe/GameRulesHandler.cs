@@ -5,6 +5,13 @@ namespace TicTacToe
 {
     public static class GameRulesHandler
     {
+
+        public static bool IsADuplicateMove(int[,] boardArray, Move moveToCheck)
+        {
+            var (coordX, coordY) = moveToCheck.GetCoord();
+            return boardArray[coordX, coordY] != 0;
+        }
+        
         public static bool HasDrawn(int[,] boardArray)
         {
             return boardArray.Cast<int>().All(cell => cell != 0);

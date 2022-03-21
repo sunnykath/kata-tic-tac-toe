@@ -200,11 +200,11 @@ namespace TestTicTacToe
             // Arrange 
             var gameDrawnBoard = new int[3,3]
             {
-                {1, 2, 0},
-                {0, 0, 1},
-                {0, 0, 2}
+                {1, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0}
             };
-            var duplicateMove = new Move(1, 1);
+            var duplicateMove = new Move(0, 0);
         
             // Act
             var isDuplicateMove = GameRulesHandler.IsADuplicateMove(gameDrawnBoard, duplicateMove);
