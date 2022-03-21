@@ -58,7 +58,7 @@ namespace TicTacToe
             var inputStrings = playerInput.Split(',');
             var moveCoords = inputStrings.Select(int.Parse).ToList();
 
-            _moveInput = new Move(moveCoords[0], moveCoords[1]);
+            _moveInput = new Move(moveCoords[0] - 1, moveCoords[1] - 1);
             Console.Write(Constants.MoveAcceptedMessage);
         }
         

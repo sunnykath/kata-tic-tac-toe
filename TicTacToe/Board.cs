@@ -22,7 +22,7 @@ namespace TicTacToe
         public void PlaceMarker(Move move, int player)
         {
             var (coordX, coordY) = move.GetCoord();
-            _boardArray[coordX - 1, coordY - 1] = player;
+            _boardArray[coordX, coordY] = player;
         }
 
         public void ResetBoard()
