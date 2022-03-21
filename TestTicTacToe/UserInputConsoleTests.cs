@@ -83,6 +83,28 @@ namespace TestTicTacToe
             
         }
 
-        
+        [Fact]
+        public void Should_Accept_The_Quit_Command_After_An_Invalid_Move()
+        {
+            // Arrange
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+            
+            var stringReader = new StringReader("1 1\nq");
+            Console.SetIn(stringReader);
+
+            var uiConsole = new UserInputConsole();
+
+            var player = Constants.PlayerO;
+            
+            // Act
+            uiConsole.UpdatePlayerInput(player);
+            var hasGivenUp = uiConsole.PlayerHasGivenUp();
+            var actualString = stringWriter.ToString();
+            
+            // Assert
+            Assert.True(actualString.Contains(Constants.GameQuitMessage));
+            Assert.True(hasGivenUp);
+        }
     }
 }
