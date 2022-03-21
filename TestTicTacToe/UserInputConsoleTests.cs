@@ -11,13 +11,10 @@ namespace TestTicTacToe
         [Fact]
         public void Should_Ask_For_Input_Again_When_Invalid_Input_Is_Given_For_The_Players_Move()
         {
-            
             // Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
 
-            const string expectedStringContains = "Invalid Input, please try again: ";
-            
             var stringReader = new StringReader("1 1\n1,1");
             Console.SetIn(stringReader);
             
@@ -25,11 +22,11 @@ namespace TestTicTacToe
             var player = Constants.PlayerO;
             
             // Act
-            uiConsole.GetPlayerInput(player);
+            uiConsole.UpdatePlayerInput(player);
             var actualString = stringWriter.ToString();
             
             // Assert
-            Assert.True(actualString.Contains(expectedStringContains));
+            Assert.True(actualString.Contains(Constants.InvalidInputErrorMessage));
             
         }
         
@@ -40,8 +37,6 @@ namespace TestTicTacToe
             // Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
-
-            var expectedStringContains = "Move accepted";
             
             var stringReader = new StringReader("1,2");
             Console.SetIn(stringReader);
@@ -53,25 +48,22 @@ namespace TestTicTacToe
             var player = Constants.PlayerO;
             
             // Act
-            uiConsole.GetPlayerInput(player);
+            uiConsole.UpdatePlayerInput(player);
             var actualMove = uiConsole.GetPlayerMove();
             var actualString = stringWriter.ToString();
             
             // Assert
-            Assert.True(actualString.Contains(expectedStringContains));
+            Assert.True(actualString.Contains(Constants.MoveAcceptedMessage));
             Assert.Equal(expectedMove, actualMove);
             
         }
         
         [Fact]
-        public void Should_Return_True_For_Given_Up_When_Player_Inputs_q()
+        public void Should_Return_True_For_Given_Up_When_Player_Inputs_Q()
         {
-            
             // Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
-
-            var expectedStringContains = "has given up";
             
             var stringReader = new StringReader("q");
             Console.SetIn(stringReader);
@@ -81,12 +73,12 @@ namespace TestTicTacToe
             var player = Constants.PlayerO;
             
             // Act
-            uiConsole.GetPlayerInput(player);
+            uiConsole.UpdatePlayerInput(player);
             var hasGivenUp = uiConsole.PlayerHasGivenUp();
             var actualString = stringWriter.ToString();
             
             // Assert
-            Assert.True(actualString.Contains(expectedStringContains));
+            Assert.True(actualString.Contains(Constants.GameQuitMessage));
             Assert.True(hasGivenUp);
             
         }
