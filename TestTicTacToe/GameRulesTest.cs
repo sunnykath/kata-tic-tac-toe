@@ -193,5 +193,27 @@ namespace TestTicTacToe
             Assert.True(hasDrawnGame);
         }
 
+
+        [Fact]
+        public void Should_Return_True_When_A_Duplicate_Move_Is_Made()
+        {
+            // Arrange 
+            var gameDrawnBoard = new int[3,3]
+            {
+                {1, 2, 0},
+                {0, 0, 1},
+                {0, 0, 2}
+            };
+            var duplicateMove = new Move(1, 1);
+        
+            // Act
+            var isDuplicateMove = GameRulesHandler.IsADuplicateMove(gameDrawnBoard, duplicateMove);
+        
+            // Assert
+            Assert.True(isDuplicateMove);
+        }
+        
+        
+
     }
 }
