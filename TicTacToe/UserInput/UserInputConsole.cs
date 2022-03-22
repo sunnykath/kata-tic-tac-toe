@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace TicTacToe
+namespace TicTacToe.UserInput
 {
     public class UserInputConsole : IUserInput
     {
@@ -14,15 +14,14 @@ namespace TicTacToe
 
             var playerInput = GetValidatedInput();
 
-            if (IsInputACommand(playerInput))
+            if (IsInputAQuitCommand(playerInput))
             {
-                HandleCommandInput(playerInput);
+                HandleQuitCommand();
             }
             else
             {
                 HandleMoveInput(playerInput);
             }
-
         }
 
         private string GetValidatedInput()
@@ -33,24 +32,21 @@ namespace TicTacToe
             {
                 if(!isAValidMoveInput) Console.Write(Constants.InvalidInputErrorMessage);
                 input = Console.ReadLine();
-                isAValidMoveInput = IsInputACommand(input) || InputValidator.CheckInput(Constants.ValidMoveRegularExpression, input);
+                isAValidMoveInput = IsInputAQuitCommand(input) || InputValidator.CheckInput(Constants.ValidMoveRegularExpression, input);
             } while (!isAValidMoveInput);
 
             return input;
         }
         
-        private bool IsInputACommand(string playerInput)
+        private bool IsInputAQuitCommand(string playerInput)
         {
             return playerInput == Constants.QuitCommand;
         }
 
-        private void HandleCommandInput(string playerInput)
+        private void HandleQuitCommand()
         {
-            if (playerInput == Constants.QuitCommand)
-            {
-                _hasGivenUp = true;
-                Console.Write(Constants.GameQuitMessage);
-            }
+            _hasGivenUp = true;
+            Console.Write(Constants.GameQuitMessage);
         }
 
         private void HandleMoveInput(string playerInput)
@@ -58,7 +54,7 @@ namespace TicTacToe
             var inputStrings = playerInput.Split(',');
             var moveCoords = inputStrings.Select(int.Parse).ToList();
 
-            _moveInput = new Move(moveCoords[0] - 1, moveCoords[1] - 1);
+            _moveInput = new Move(moveCoords[0] - Constants.IndexingAdjustment, moveCoords[1] - Constants.IndexingAdjustment);
             Console.Write(Constants.MoveAcceptedMessage);
         }
         

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using TicTacToe;
+using TicTacToe.UserInput;
 using Xunit;
 
 namespace TestTicTacToe
