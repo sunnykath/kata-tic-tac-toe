@@ -2,13 +2,13 @@ using System;
 
 namespace TicTacToe
 {
-    public class GameLoop
+    public class GamePlay
     {
         private int _player;
         private GameStatus _gameStatus;
         private Board _board;
         
-        public GameLoop()
+        public GamePlay()
         {
             _board = new Board();
             _player = RandomlyPickPlayerForFirst();
