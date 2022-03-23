@@ -1,4 +1,5 @@
 using System;
+using TicTacToe.UserInput;
 
 namespace TicTacToe
 {
@@ -16,7 +17,18 @@ namespace TicTacToe
 
         public void Play()
         {
-            
+            var uiConsole = new UserInputConsole();
+            // Get Player Input
+            uiConsole.UpdatePlayerInput(_player);
+
+            // Check if quit
+            _gameStatus = uiConsole.PlayerHasGivenUp() ? GameStatus.Quit : CheckGameStatus();
+
+            // Output some message feedback
+            if (_gameStatus == GameStatus.Quit)
+            {
+                uiConsole.OutputMessage(Constants.GameQuitMessage);
+            }
         }
         
         public int GetPlayer()
@@ -53,9 +65,9 @@ namespace TicTacToe
         {
             
         }
-        
-        
-        public GameStatus CheckGameStatus()   
+
+
+        private GameStatus CheckGameStatus()   
         {
             var boardArray = _board.GetBoard();
             _gameStatus = GameRulesHandler.HasWon(boardArray) ? GameStatus.Won : (GameRulesHandler.HasDrawn(boardArray) ? GameStatus.Draw : GameStatus.Playing);
@@ -63,7 +75,10 @@ namespace TicTacToe
             return _gameStatus;
         }
 
-        
-        
+
+        public GameStatus GetCurrentStatus()
+        {
+            return _gameStatus;
+        }
     }
 }
