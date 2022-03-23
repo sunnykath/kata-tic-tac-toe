@@ -92,5 +92,34 @@ namespace TestTicTacToe
             Assert.True(actualString.Contains(Constants.MoveAcceptedMessage));
             Assert.Equal(expectedBoard, actualBoard);
         }
+        
+        [Fact]
+        public void Should_Update_The_Board_With_Two_Player_Move_Inputs_And_Swap_Players_In_Between_Moves()
+        {
+            // Arrange
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+            
+            var stringReader = new StringReader("1,1\n1,2\nq");
+            Console.SetIn(stringReader);
+
+            var game = new GamePlay();
+            var player = game.GetPlayer();
+            var otherPlayer = player == Constants.PlayerO ? Constants.PlayerX : Constants.PlayerO;
+            var expectedBoard = new int[3,3]
+            {
+                {player, otherPlayer, 0},
+                {0, 0, 0},
+                {0, 0, 0}
+            };
+            
+            // Act
+            game.Play();
+            var actualString = stringWriter.ToString();
+            var actualBoard = game.GetBoard();
+            
+            // Assert
+            Assert.Equal(expectedBoard, actualBoard);
+        }
     }
 }
