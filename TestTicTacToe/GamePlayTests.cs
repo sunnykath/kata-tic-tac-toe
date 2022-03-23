@@ -65,7 +65,7 @@ namespace TestTicTacToe
         }
         
         [Fact]
-        public void Should_Update_The_Board_With_The_Player_Move_Input()
+        public void Should_Update_The_Board_With_The_Player_Move_Input_And_Output_A_Move_Accepted_Message()
         {
             // Arrange
             var stringWriter = new StringWriter();
@@ -92,8 +92,5 @@ namespace TestTicTacToe
             Assert.True(actualString.Contains(Constants.MoveAcceptedMessage));
             Assert.Equal(expectedBoard, actualBoard);
         }
-
-
-
     }
 }
