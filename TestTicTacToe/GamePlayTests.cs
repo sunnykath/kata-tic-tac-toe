@@ -150,5 +150,40 @@ namespace TestTicTacToe
             Assert.True(actualString.Contains(Constants.DuplicateMoveMessage));
             Assert.Equal(expectedBoard, actualBoard);
         }
+        
+        [Fact]
+        public void Should_Change_GameStatus_To_Won_When_3_In_A_Row_For_A_Player()
+        {
+            // Arrange
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+    
+            var stringReader = new StringReader("1,1\n1,2\n2,1\n2,2\n3,1\nq");
+            Console.SetIn(stringReader);
+
+            var game = new GamePlay();
+            var player = game.GetPlayer();
+            var otherPlayer = player == Constants.PlayerO ? Constants.PlayerX : Constants.PlayerO;
+            
+            var expectedBoard = new int[3,3]
+            {
+                {player, otherPlayer, 0},
+                {player, otherPlayer, 0},
+                {player, 0, 0}
+            };
+            
+            var expectedGameStatus = GameStatus.Won;
+    
+            // Act
+            game.Play();
+            var actualString = stringWriter.ToString();
+            var actualBoard = game.GetBoard();
+            var actualGameStatus = game.GetCurrentStatus();
+    
+            // Assert
+            Assert.True(actualString.Contains(Constants.GameWonMessage));
+            Assert.Equal(expectedGameStatus, actualGameStatus);
+            Assert.Equal(expectedBoard, actualBoard);
+        }
     }
 }
