@@ -8,10 +8,12 @@ namespace TicTacToe
         private int _player;
         private GameStatus _gameStatus;
         private Board _board;
+        private int[,] _boardArray;
         
         public GamePlay()
         {
             _board = new Board();
+            _boardArray = _board.GetBoard();
             _player = RandomlyPickPlayerForFirst();
         }
 
@@ -23,11 +25,16 @@ namespace TicTacToe
 
             // Check if quit
             _gameStatus = uiConsole.PlayerHasGivenUp() ? GameStatus.Quit : CheckGameStatus();
-
-            // Output some message feedback
+            
             if (_gameStatus == GameStatus.Quit)
             {
                 uiConsole.OutputMessage(Constants.GameQuitMessage);
+            }
+            else
+            {
+                var inputMove = uiConsole.GetPlayerMove();
+                _board.PlaceMarker(inputMove, _player);
+                uiConsole.OutputMessage(Constants.MoveAcceptedMessage);
             }
         }
         
@@ -69,8 +76,7 @@ namespace TicTacToe
 
         private GameStatus CheckGameStatus()   
         {
-            var boardArray = _board.GetBoard();
-            _gameStatus = GameRulesHandler.HasWon(boardArray) ? GameStatus.Won : (GameRulesHandler.HasDrawn(boardArray) ? GameStatus.Draw : GameStatus.Playing);
+            _gameStatus = GameRulesHandler.HasWon(_boardArray) ? GameStatus.Won : (GameRulesHandler.HasDrawn(_boardArray) ? GameStatus.Draw : GameStatus.Playing);
             
             return _gameStatus;
         }
@@ -79,6 +85,11 @@ namespace TicTacToe
         public GameStatus GetCurrentStatus()
         {
             return _gameStatus;
+        }
+
+        public int[,] GetBoard()
+        {
+            return _boardArray;
         }
     }
 }
