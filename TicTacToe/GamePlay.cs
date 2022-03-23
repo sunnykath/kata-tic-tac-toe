@@ -20,21 +20,26 @@ namespace TicTacToe
         public void Play()
         {
             var uiConsole = new UserInputConsole();
-            // Get Player Input
-            uiConsole.UpdatePlayerInput(_player);
 
-            // Check if quit
-            _gameStatus = uiConsole.PlayerHasGivenUp() ? GameStatus.Quit : CheckGameStatus();
+            while (_gameStatus != GameStatus.Quit)
+            {
+                // Get Player Input
+                uiConsole.UpdatePlayerInput(_player);
+
+                // Check if quit
+                _gameStatus = uiConsole.PlayerHasGivenUp() ? GameStatus.Quit : CheckGameStatus();
             
-            if (_gameStatus == GameStatus.Quit)
-            {
-                uiConsole.OutputMessage(Constants.GameQuitMessage);
-            }
-            else
-            {
-                var inputMove = uiConsole.GetPlayerMove();
-                _board.PlaceMarker(inputMove, _player);
-                uiConsole.OutputMessage(Constants.MoveAcceptedMessage);
+                if (_gameStatus == GameStatus.Quit)
+                {
+                    uiConsole.OutputMessage(Constants.GameQuitMessage);
+                }
+                else
+                {
+                    var inputMove = uiConsole.GetPlayerMove();
+                    _board.PlaceMarker(inputMove, _player);
+                    uiConsole.OutputMessage(Constants.MoveAcceptedMessage);
+                }
+                SwapPlayer();
             }
         }
         
