@@ -6,5 +6,6 @@ namespace TicTacToe.UserInput
         public bool PlayerHasGivenUp();
         public Move GetPlayerMove();
         public void OutputBoard();
+        public void OutputMessage(string message);
     }
 }
