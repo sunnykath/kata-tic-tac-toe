@@ -121,5 +121,34 @@ namespace TestTicTacToe
             // Assert
             Assert.Equal(expectedBoard, actualBoard);
         }
+
+        [Fact]
+        public void Should_Not_Update_The_Board_With_The_Player_Move_Input_If_A_Duplicate_Move_Is_Entered_And_Output_A_Duplicate_Move_Message()
+        {
+            // Arrange
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+    
+            var stringReader = new StringReader("1,1\n1,1\nq");
+            Console.SetIn(stringReader);
+
+            var game = new GamePlay();
+            var player = game.GetPlayer();
+            var expectedBoard = new int[3,3]
+            {
+                {player, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0}
+            };
+    
+            // Act
+            game.Play();
+            var actualString = stringWriter.ToString();
+            var actualBoard = game.GetBoard();
+    
+            // Assert
+            Assert.True(actualString.Contains(Constants.DuplicateMoveMessage));
+            Assert.Equal(expectedBoard, actualBoard);
+        }
     }
 }
