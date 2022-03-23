@@ -41,7 +41,6 @@ namespace TestTicTacToe
 
         }
 
-        
         [Fact]
         public void Should_End_Game_When_PLayer_Inputs_Quit_Command()
         {
@@ -64,6 +63,37 @@ namespace TestTicTacToe
             Assert.True(actualString.Contains(Constants.GameQuitMessage));
             Assert.Equal(expectedGameStatus, actualGameStatus);
         }
+        
+        [Fact]
+        public void Should_Update_The_Board_With_The_Player_Move_Input()
+        {
+            // Arrange
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+            
+            var stringReader = new StringReader("1,1\nq");
+            Console.SetIn(stringReader);
+
+            var game = new GamePlay();
+            var player = game.GetPlayer();
+            var expectedBoard = new int[3,3]
+            {
+                {player, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0}
+            };
+            
+            // Act
+            game.Play();
+            var actualString = stringWriter.ToString();
+            var actualBoard = game.GetBoard();
+            
+            // Assert
+            Assert.True(actualString.Contains(Constants.MoveAcceptedMessage));
+            Assert.Equal(expectedBoard, actualBoard);
+        }
+
+
 
     }
 }
