@@ -36,13 +36,10 @@ namespace TestTicTacToe
         {
             
             // Arrange
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-            
             var stringReader = new StringReader("1,2");
             Console.SetIn(stringReader);
 
-            var expectedMove = new Move(1, 2);
+            var expectedMove = new Move(1 - Constants.IndexingAdjustment, 2 - Constants.IndexingAdjustment);
             
             var uiConsole = new UserInputConsole();
 
@@ -51,10 +48,8 @@ namespace TestTicTacToe
             // Act
             uiConsole.UpdatePlayerInput(player);
             var actualMove = uiConsole.GetPlayerMove();
-            var actualString = stringWriter.ToString();
             
             // Assert
-            Assert.True(actualString.Contains(Constants.MoveAcceptedMessage));
             Assert.Equal(expectedMove, actualMove);
             
         }
@@ -63,9 +58,6 @@ namespace TestTicTacToe
         public void Should_Return_True_For_Given_Up_When_Player_Inputs_Q()
         {
             // Arrange
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-            
             var stringReader = new StringReader("q");
             Console.SetIn(stringReader);
 
@@ -76,10 +68,8 @@ namespace TestTicTacToe
             // Act
             uiConsole.UpdatePlayerInput(player);
             var hasGivenUp = uiConsole.PlayerHasGivenUp();
-            var actualString = stringWriter.ToString();
             
             // Assert
-            Assert.True(actualString.Contains(Constants.GameQuitMessage));
             Assert.True(hasGivenUp);
             
         }
@@ -88,9 +78,6 @@ namespace TestTicTacToe
         public void Should_Accept_The_Quit_Command_After_An_Invalid_Move()
         {
             // Arrange
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-            
             var stringReader = new StringReader("1 1\nq");
             Console.SetIn(stringReader);
 
@@ -101,10 +88,8 @@ namespace TestTicTacToe
             // Act
             uiConsole.UpdatePlayerInput(player);
             var hasGivenUp = uiConsole.PlayerHasGivenUp();
-            var actualString = stringWriter.ToString();
             
             // Assert
-            Assert.True(actualString.Contains(Constants.GameQuitMessage));
             Assert.True(hasGivenUp);
         }
     }
