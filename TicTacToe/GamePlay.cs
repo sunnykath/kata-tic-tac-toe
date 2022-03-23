@@ -36,8 +36,15 @@ namespace TicTacToe
                 else
                 {
                     var inputMove = uiConsole.GetPlayerMove();
-                    _board.PlaceMarker(inputMove, _player);
-                    uiConsole.OutputMessage(Constants.MoveAcceptedMessage);
+                    if (GameRulesHandler.IsADuplicateMove(_boardArray, inputMove))
+                    {
+                        uiConsole.OutputMessage(Constants.DuplicateMoveMessage);
+                    }
+                    else
+                    {
+                        _board.PlaceMarker(inputMove, _player);
+                        uiConsole.OutputMessage(Constants.MoveAcceptedMessage);   
+                    }
                 }
                 SwapPlayer();
             }

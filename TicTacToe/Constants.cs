@@ -12,6 +12,7 @@ namespace TicTacToe
         public const string InvalidInputErrorMessage = "Invalid Input, please try again: ";
         public const string MoveAcceptedMessage = "Move Accepted.";
         public const string GameQuitMessage = "You have given up.\n";
+        public const string DuplicateMoveMessage = "Oh no, a piece is already at this place! Try again...";
 
         public const string QuitCommand = "q";
     }
