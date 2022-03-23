@@ -53,13 +53,16 @@ namespace TestTicTacToe
             Console.SetIn(stringReader);
 
             var game = new GamePlay();
+            var expectedGameStatus = GameStatus.Quit;
             
             // Act
             game.Play();
             var actualString = stringWriter.ToString();
+            var actualGameStatus = game.GetCurrentStatus();
             
             // Assert
             Assert.True(actualString.Contains(Constants.GameQuitMessage));
+            Assert.Equal(expectedGameStatus, actualGameStatus);
         }
 
     }
