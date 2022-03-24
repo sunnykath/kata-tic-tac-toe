@@ -216,5 +216,41 @@ namespace TestTicTacToe
             Assert.Equal(expectedBoard, actualBoard);
             Assert.Equal(expectedGameStatus, actualGameStatus);
         }
+        
+        [Fact]
+        public void Should_Print_The_Updated_Board_While_The_Player_Is_Inputting_Moves()
+        {
+            // Arrange
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+            
+            var stringReader = new StringReader("1,1\n1,2\nq");
+            Console.SetIn(stringReader);
+
+            var game = new GamePlay();
+            var player = game.GetPlayer();
+            var otherPlayer = player == Constants.PlayerO.value ? Constants.PlayerX.value : Constants.PlayerO.value;
+            var expectedBoard = new[,]
+            {
+                {player, otherPlayer, 0},
+                {0, 0, 0},
+                {0, 0, 0}
+            };
+            
+            const string expectedBoardOutputBeforeFirstMove = ". . . \n. . . \n. . . \n";
+            const string expectedBoardOutputAfterFirstMove = "X . . \n. . . \n. . . \n";
+            const string expectedBoardOutputAfterSecondMove = "X O . \n. . . \n. . . \n";
+            
+            // Act
+            game.Play();
+            var actualBoard = game.GetBoardArray();
+            var actualBoardOutputs = stringWriter.ToString();
+
+            // Assert
+            Assert.Equal(expectedBoard, actualBoard);
+            Assert.Contains(expectedBoardOutputBeforeFirstMove, actualBoardOutputs);
+            Assert.Contains(expectedBoardOutputAfterFirstMove, actualBoardOutputs);
+            Assert.Contains(expectedBoardOutputAfterSecondMove, actualBoardOutputs);
+        }
     }
 }
