@@ -10,7 +10,7 @@ namespace TestTicTacToe
         {
             // Arrange 
             var board = new Board();
-            var move = new Move(1, 1);
+            var move = new Move(1 - Constants.IndexingAdjustment, 1 - Constants.IndexingAdjustment);
             
             var expectedBoard = new[,]
             {
@@ -32,8 +32,8 @@ namespace TestTicTacToe
         {
             // Arrange 
             var board = new Board();
-            var firstMove = new Move(1, 1);
-            var secondMove = new Move(1, 2);
+            var firstMove = new Move(1 - Constants.IndexingAdjustment, 1 - Constants.IndexingAdjustment);
+            var secondMove = new Move(1 - Constants.IndexingAdjustment, 2 - Constants.IndexingAdjustment);
             
             var expectedBoardBeforeReset = new[,]
             {
