@@ -76,11 +76,11 @@ namespace TicTacToe
         private static int RandomlyPickPlayerForFirst()
         {
             var rand = new Random();
-            return rand.Next(Constants.PlayerX, Constants.PlayerO);
+            return rand.Next(Constants.PlayerX.value, Constants.PlayerO.value);
         }
         public void SwapPlayer()
         {
-            _player = _player == Constants.PlayerX ? Constants.PlayerO : Constants.PlayerX;
+            _player = _player == Constants.PlayerX.value ? Constants.PlayerO.value : Constants.PlayerX.value;
         }
         
         private void UpdateGameStatus()   

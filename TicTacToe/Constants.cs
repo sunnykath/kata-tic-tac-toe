@@ -1,9 +1,13 @@
+using System.Collections.Generic;
+
 namespace TicTacToe
 {
     public static class Constants
     {
-        public const int PlayerX = 1;
-        public const int PlayerO = 2;
+        public static readonly (int value, string mark) PlayerX = (1, "X");
+        public static readonly (int value, string mark) PlayerO = (2, "O");
+        // public const int PlayerO = 2;
+        
 
         public const int IndexingAdjustment = 1;
 

@@ -23,7 +23,7 @@ namespace TestTicTacToe
             var player = Constants.PlayerO;
             
             // Act
-            uiConsole.UpdatePlayerInput(player);
+            uiConsole.UpdatePlayerInput(player.value);
             var actualString = stringWriter.ToString();
             
             // Assert
@@ -46,7 +46,7 @@ namespace TestTicTacToe
             var player = Constants.PlayerO;
             
             // Act
-            uiConsole.UpdatePlayerInput(player);
+            uiConsole.UpdatePlayerInput(player.value);
             var actualMove = uiConsole.GetPlayerMove();
             
             // Assert
@@ -66,7 +66,7 @@ namespace TestTicTacToe
             var player = Constants.PlayerO;
             
             // Act
-            uiConsole.UpdatePlayerInput(player);
+            uiConsole.UpdatePlayerInput(player.value);
             var hasGivenUp = uiConsole.PlayerHasGivenUp();
             
             // Assert
@@ -86,7 +86,7 @@ namespace TestTicTacToe
             var player = Constants.PlayerO;
             
             // Act
-            uiConsole.UpdatePlayerInput(player);
+            uiConsole.UpdatePlayerInput(player.value);
             var hasGivenUp = uiConsole.PlayerHasGivenUp();
             
             // Assert

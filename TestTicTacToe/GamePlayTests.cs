@@ -105,7 +105,7 @@ namespace TestTicTacToe
 
             var game = new GamePlay();
             var player = game.GetPlayer();
-            var otherPlayer = player == Constants.PlayerO ? Constants.PlayerX : Constants.PlayerO;
+            var otherPlayer = player == Constants.PlayerO.value ? Constants.PlayerX.value : Constants.PlayerO.value;
             var expectedBoard = new int[3,3]
             {
                 {player, otherPlayer, 0},
@@ -163,7 +163,7 @@ namespace TestTicTacToe
 
             var game = new GamePlay();
             var player = game.GetPlayer();
-            var otherPlayer = player == Constants.PlayerO ? Constants.PlayerX : Constants.PlayerO;
+            var otherPlayer = player == Constants.PlayerO.value ? Constants.PlayerX.value : Constants.PlayerO.value;
             
             var expectedBoard = new int[3,3]
             {
@@ -198,7 +198,7 @@ namespace TestTicTacToe
 
             var game = new GamePlay();
             var player = game.GetPlayer();
-            var otherPlayer = player == Constants.PlayerO ? Constants.PlayerX : Constants.PlayerO;
+            var otherPlayer = player == Constants.PlayerO.value ? Constants.PlayerX.value : Constants.PlayerO.value;
             
             var expectedBoard = new int[3,3]
             {
