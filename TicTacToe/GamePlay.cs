@@ -82,35 +82,13 @@ namespace TicTacToe
         {
             _player = _player == Constants.PlayerX ? Constants.PlayerO : Constants.PlayerX;
         }
-
-        private void Completed()
-        {
-            
-        }
-
-        private void GiveUp()
-        {
-            
-        }
-
-        private void Reset()
-        {
-            
-        }
-
-        private void End()
-        {
-            
-        }
-
-
+        
         private void UpdateGameStatus()   
         {
             _gameStatus = GameRulesHandler.HasWon(_boardArray) ? GameStatus.Won : (GameRulesHandler.HasDrawn(_boardArray) ? GameStatus.Draw : (_givenUp ? GameStatus.Quit : GameStatus.Playing));
             
         }
-
-
+        
         public GameStatus GetCurrentStatus()
         {
             return _gameStatus;

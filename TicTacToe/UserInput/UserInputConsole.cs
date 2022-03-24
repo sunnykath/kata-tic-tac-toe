@@ -46,7 +46,6 @@ namespace TicTacToe.UserInput
         private void HandleQuitCommand()
         {
             _hasGivenUp = true;
-            // Console.Write(Constants.GameQuitMessage);
         }
 
         private void HandleMoveInput(string playerInput)
@@ -55,7 +54,6 @@ namespace TicTacToe.UserInput
             var moveCoords = inputStrings.Select(int.Parse).ToList();
 
             _moveInput = new Move(moveCoords[0] - Constants.IndexingAdjustment, moveCoords[1] - Constants.IndexingAdjustment);
-            // Console.Write(Constants.MoveAcceptedMessage);
         }
         
         public bool PlayerHasGivenUp()
