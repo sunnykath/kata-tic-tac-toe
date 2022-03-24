@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Runtime.InteropServices.ComTypes;
 using TicTacToe;
 using Xunit;
 
@@ -251,6 +252,38 @@ namespace TestTicTacToe
             Assert.Contains(expectedBoardOutputBeforeFirstMove, actualBoardOutputs);
             Assert.Contains(expectedBoardOutputAfterFirstMove, actualBoardOutputs);
             Assert.Contains(expectedBoardOutputAfterSecondMove, actualBoardOutputs);
+        }
+        
+        [Fact]
+        public void Should_Print_The_Final_Board_After_A_Win()
+        {
+            // Arrange
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+            
+            var stringReader = new StringReader("1,1\n1,2\n2,1\n2,2\n3,1\n");
+            Console.SetIn(stringReader);
+
+            var game = new GamePlay();
+            var player = game.GetPlayer();
+            var otherPlayer = player == Constants.PlayerO.value ? Constants.PlayerX.value : Constants.PlayerO.value;
+            var expectedBoard = new [,]
+            {
+                {player, otherPlayer, 0},
+                {player, otherPlayer, 0},
+                {player, 0, 0}
+            };
+
+            const string expectedBoardOutputAfterWinning = "X 0 . \nX 0 . \nX . . \n";
+            
+            // Act
+            game.Play();
+            var actualBoard = game.GetBoardArray();
+            var actualBoardOutputs = stringWriter.ToString();
+
+            // Assert
+            Assert.Equal(expectedBoard, actualBoard);
+            Assert.Contains(expectedBoardOutputAfterWinning, actualBoardOutputs);
         }
     }
 }
