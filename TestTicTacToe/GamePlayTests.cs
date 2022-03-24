@@ -255,7 +255,7 @@ namespace TestTicTacToe
         }
         
         [Fact]
-        public void Should_Print_The_Final_Board_After_A_Win()
+        public void Should_Print_The_Final_Board_After_The_Game_Ends()
         {
             // Arrange
             var stringWriter = new StringWriter();
@@ -274,7 +274,7 @@ namespace TestTicTacToe
                 {player, 0, 0}
             };
 
-            const string expectedBoardOutputAfterWinning = "X 0 . \nX 0 . \nX . . \n";
+            const string expectedBoardOutputAfterWinning = "X O . \nX O . \nX . . \n";
             
             // Act
             game.Play();

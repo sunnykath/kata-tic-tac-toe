@@ -56,6 +56,8 @@ namespace TicTacToe
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            uiConsole.OutputBoard(_boardArray);
+
         }
 
         private string HandleMoveInput(Move inputMove)
