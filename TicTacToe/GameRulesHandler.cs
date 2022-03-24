@@ -8,7 +8,7 @@ namespace TicTacToe
         public static bool IsADuplicateMove(int[,] boardArray, Move moveToCheck)
         {
             var (coordX, coordY) = moveToCheck.GetCoord();
-            return boardArray[coordX, coordY] != 0;
+            return boardArray[coordX, coordY] != Constants.EmptyCell.value;
         }
         
         public static bool HasDrawn(int[,] boardArray)
