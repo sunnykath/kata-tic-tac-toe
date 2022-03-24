@@ -86,7 +86,7 @@ namespace TestTicTacToe
             // Act
             game.Play();
             var actualString = stringWriter.ToString();
-            var actualBoard = game.GetBoard();
+            var actualBoard = game.GetBoardArray();
             
             // Assert
             Assert.True(actualString.Contains(Constants.MoveAcceptedMessage));
@@ -116,7 +116,7 @@ namespace TestTicTacToe
             // Act
             game.Play();
             var actualString = stringWriter.ToString();
-            var actualBoard = game.GetBoard();
+            var actualBoard = game.GetBoardArray();
             
             // Assert
             Assert.Equal(expectedBoard, actualBoard);
@@ -144,7 +144,7 @@ namespace TestTicTacToe
             // Act
             game.Play();
             var actualString = stringWriter.ToString();
-            var actualBoard = game.GetBoard();
+            var actualBoard = game.GetBoardArray();
     
             // Assert
             Assert.True(actualString.Contains(Constants.DuplicateMoveMessage));
@@ -152,13 +152,13 @@ namespace TestTicTacToe
         }
         
         [Fact]
-        public void Should_Change_GameStatus_To_Won_When_3_In_A_Row_For_A_Player()
+        public void Should_Change_GameStatus_To_Won_When_3_In_A_Row_For_A_Player_And_Output_The_Winning_Message()
         {
             // Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
     
-            var stringReader = new StringReader("1,1\n1,2\n2,1\n2,2\n3,1\nq");
+            var stringReader = new StringReader("1,1\n1,2\n2,1\n2,2\n3,1\n");
             Console.SetIn(stringReader);
 
             var game = new GamePlay();
@@ -177,13 +177,48 @@ namespace TestTicTacToe
             // Act
             game.Play();
             var actualString = stringWriter.ToString();
-            var actualBoard = game.GetBoard();
+            var actualBoard = game.GetBoardArray();
             var actualGameStatus = game.GetCurrentStatus();
     
             // Assert
             Assert.True(actualString.Contains(Constants.GameWonMessage));
-            Assert.Equal(expectedGameStatus, actualGameStatus);
             Assert.Equal(expectedBoard, actualBoard);
+            Assert.Equal(expectedGameStatus, actualGameStatus);
+        }
+        
+        [Fact]
+        public void Should_Change_GameStatus_To_Draw_When_No_More_Empty_Cells_And_Output_The_Game_Drawn_Message()
+        {
+            // Arrange
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+    
+            var stringReader = new StringReader("1,1\n1,2\n1,3\n2,1\n2,2\n2,3\n3,2\n3,1\n3,3\n");
+            Console.SetIn(stringReader);
+
+            var game = new GamePlay();
+            var player = game.GetPlayer();
+            var otherPlayer = player == Constants.PlayerO ? Constants.PlayerX : Constants.PlayerO;
+            
+            var expectedBoard = new int[3,3]
+            {
+                {player,        otherPlayer,    player},
+                {otherPlayer,   player,         otherPlayer},
+                {otherPlayer,   player,         player}
+            };
+            
+            var expectedGameStatus = GameStatus.Draw;
+    
+            // Act
+            game.Play();
+            var actualString = stringWriter.ToString();
+            var actualBoard = game.GetBoardArray();
+            var actualGameStatus = game.GetCurrentStatus();
+    
+            // Assert
+            Assert.True(actualString.Contains(Constants.GameDrawnMessage));
+            Assert.Equal(expectedBoard, actualBoard);
+            Assert.Equal(expectedGameStatus, actualGameStatus);
         }
     }
 }
