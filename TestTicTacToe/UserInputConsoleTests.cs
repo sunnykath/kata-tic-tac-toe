@@ -108,9 +108,7 @@ namespace TestTicTacToe
                 {0, 0, 0}
             };
 
-            const string expectedBoardOutput = ". . ." +
-                                                ". . ." +
-                                                ". . .";
+            const string expectedBoardOutput = ". . . \n. . . \n. . . \n";
     
             var uiConsole = new UserInputConsole();
 
@@ -119,8 +117,8 @@ namespace TestTicTacToe
             var actualBoardOutput = stringWriter.ToString();
     
             // Assert
-            Assert.Contains(expectedBoardOutput, actualBoardOutput);
             Assert.Contains(Constants.BoardPrintedMessage, actualBoardOutput);
+            Assert.Contains(expectedBoardOutput, actualBoardOutput);
         }
 
     }

@@ -66,9 +66,21 @@ namespace TicTacToe.UserInput
             return _moveInput;
         }
 
-        public void OutputBoard()
+        public void OutputBoard(int[,] board)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(Constants.BoardPrintedMessage);
+            
+            for (var row = 0; row < board.GetLength(0); row++)
+            {
+                var printedRow = "";
+                for (var col = 0; col < board.GetLength(1); col++)
+                {
+                    var cell = board[row, col];
+                    printedRow += cell == Constants.PlayerO.value ? Constants.PlayerO.mark : (cell == Constants.PlayerX.value ? Constants.PlayerX.mark : Constants.EmptyCell.mark);
+                    printedRow += " ";
+                }
+                Console.Write($"{printedRow}\n");
+            }
         }
 
         public void OutputMessage(string message)
