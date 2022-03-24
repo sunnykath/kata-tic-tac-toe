@@ -6,7 +6,7 @@ namespace TicTacToe
         
         public Board()
         {
-            _boardArray = new int[3, 3]
+            _boardArray = new[,]
             {
                 {0, 0, 0},
                 {0, 0, 0},
@@ -27,7 +27,7 @@ namespace TicTacToe
 
         public void ResetBoard()
         {
-            _boardArray = new int[3, 3]
+            _boardArray = new[,]
             {
                 {0, 0, 0},
                 {0, 0, 0},

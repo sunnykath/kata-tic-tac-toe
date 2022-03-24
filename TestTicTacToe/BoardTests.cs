@@ -12,7 +12,7 @@ namespace TestTicTacToe
             var board = new Board();
             var move = new Move(1, 1);
             
-            var expectedBoard = new int[3,3]
+            var expectedBoard = new[,]
             {
                 {1, 0, 0},
                 {0, 0, 0},
@@ -35,14 +35,14 @@ namespace TestTicTacToe
             var firstMove = new Move(1, 1);
             var secondMove = new Move(1, 2);
             
-            var expectedBoardBeforeReset = new int[3,3]
+            var expectedBoardBeforeReset = new[,]
             {
                 {1, 2, 0},
                 {0, 0, 0},
                 {0, 0, 0}
             };
             
-            var expectedBoardAfterReset = new int[3,3]
+            var expectedBoardAfterReset = new[,]
             {
                 {0, 0, 0},
                 {0, 0, 0},

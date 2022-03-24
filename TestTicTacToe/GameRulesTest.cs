@@ -10,7 +10,7 @@ namespace TestTicTacToe
         public void Should_Return_False_When_3_In_A_Row_Horizontally_Of_Different_Players_Marks()
         {
             // Arrange
-            var gameLosingBoard = new int[3,3]
+            var gameLosingBoard = new[,]
             {
                 {1, 2, 1},
                 {0, 0, 0},
@@ -29,7 +29,7 @@ namespace TestTicTacToe
         public void Should_Return_False_When_3_In_A_Row_Vertically_Of_Different_Players_Marks()
         {
             // Arrange 
-            var gameLosingBoard = new int[3,3]
+            var gameLosingBoard = new[,]
             {
                 {0, 1, 0},
                 {0, 1, 0},
@@ -47,7 +47,7 @@ namespace TestTicTacToe
         public void Should_Return_False_When_3_In_A_Row_Diagonally_As_Forward_Slash_Of_Different_Players_Marks()
         {
             // Arrange 
-            var gameLosingBoard = new int[3,3]
+            var gameLosingBoard = new[,]
             {
                 {2, 0, 0},
                 {0, 1, 0},
@@ -66,7 +66,7 @@ namespace TestTicTacToe
         public void Should_Return_False_When_3_In_A_Row_Diagonally_As_Backward_Slash_Of_Different_Players_Marks()
         {
             // Arrange 
-            var gameLosingBoard = new int[3,3]
+            var gameLosingBoard = new[,]
             {
                 {0, 0, 1},
                 {0, 2, 0},
@@ -86,7 +86,7 @@ namespace TestTicTacToe
         public void Should_Return_True_When_GameStatus_Is_Checked_If_3_In_A_Row_Horizontally()
         {
             // Arrange
-            var gameWinningBoard = new int[3,3]
+            var gameWinningBoard = new[,]
             {
                 {1, 1, 1},
                 {0, 0, 0},
@@ -104,7 +104,7 @@ namespace TestTicTacToe
         public void Should_Return_True_When_GameStatus_Is_Checked_If_3_In_A_Row_Vertically()
         {
             // Arrange 
-            var gameWinningBoard = new int[3,3]
+            var gameWinningBoard = new[,]
             {
                 {0, 1, 0},
                 {0, 1, 0},
@@ -124,7 +124,7 @@ namespace TestTicTacToe
         public void Should_Return_True_When_GameStatus_Is_Checked_If_3_In_A_Row_Diagonally_As_Forward_Slash()
         {
             // Arrange 
-            var gameWinningBoard = new int[3,3]
+            var gameWinningBoard = new[,]
             {
                 {1, 0, 0},
                 {0, 1, 0},
@@ -143,7 +143,7 @@ namespace TestTicTacToe
         public void Should_Return_True_When_GameStatus_Is_Checked_If_3_In_A_Row_Diagonally_As_Backward_Slash()
         {
             // Arrange 
-            var gameWinningBoard = new int[3,3]
+            var gameWinningBoard = new[,]
             {
                 {0, 0, 1},
                 {0, 1, 0},
@@ -161,7 +161,7 @@ namespace TestTicTacToe
         public void Should_Return_False_When_Checking_For_Draw_With_Empty_Cells()
         {
             // Arrange 
-            var gameInProgressBoard = new int[3,3]
+            var gameInProgressBoard = new[,]
             {
                 {0, 2, 1},
                 {0, 2, 0},
@@ -179,7 +179,7 @@ namespace TestTicTacToe
         public void Should_Return_True_When_Checking_For_Draw_With_No_Empty_Cells()
         {
             // Arrange 
-            var gameDrawnBoard = new int[3,3]
+            var gameDrawnBoard = new[,]
             {
                 {1, 2, 1},
                 {2, 2, 1},
@@ -198,7 +198,7 @@ namespace TestTicTacToe
         public void Should_Return_True_When_A_Duplicate_Move_Is_Made()
         {
             // Arrange 
-            var gameDrawnBoard = new int[3,3]
+            var gameDrawnBoard = new[,]
             {
                 {1, 0, 0},
                 {0, 0, 0},

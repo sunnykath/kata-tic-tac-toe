@@ -27,7 +27,7 @@ namespace TicTacToe.UserInput
         private string GetValidatedInput()
         {
             var isAValidMoveInput = true;
-            var input = "";
+            string input;
             do
             {
                 if(!isAValidMoveInput) Console.Write(Constants.InvalidInputErrorMessage);
@@ -68,7 +68,7 @@ namespace TicTacToe.UserInput
 
         public void OutputBoard()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void OutputMessage(string message)

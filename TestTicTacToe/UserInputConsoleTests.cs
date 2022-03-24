@@ -27,7 +27,7 @@ namespace TestTicTacToe
             var actualString = stringWriter.ToString();
             
             // Assert
-            Assert.True(actualString.Contains(Constants.InvalidInputErrorMessage));
+            Assert.Contains(Constants.InvalidInputErrorMessage, actualString);
             
         }
         
