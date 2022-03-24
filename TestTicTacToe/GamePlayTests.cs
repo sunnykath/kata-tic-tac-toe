@@ -193,7 +193,7 @@ namespace TestTicTacToe
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
     
-            var stringReader = new StringReader("1,1\n1,2\n1,3\n2,1\n2,2\n2,3\n3,2\n3,1\n3,3\n");
+            var stringReader = new StringReader("1,1\n1,2\n1,3\n2,1\n2,3\n2,2\n3,1\n3,3\n3,2\n");
             Console.SetIn(stringReader);
 
             var game = new GamePlay();
@@ -203,8 +203,8 @@ namespace TestTicTacToe
             var expectedBoard = new int[3,3]
             {
                 {player,        otherPlayer,    player},
-                {otherPlayer,   player,         otherPlayer},
-                {otherPlayer,   player,         player}
+                {otherPlayer,   otherPlayer,    player},
+                {player,        player,         otherPlayer}
             };
             
             var expectedGameStatus = GameStatus.Draw;
