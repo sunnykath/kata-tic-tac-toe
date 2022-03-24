@@ -97,7 +97,6 @@ namespace TestTicTacToe
         public void Should_Print_An_Empty_Board_With_Dots_Representing_Empty_Cells_And_Board_Printing_Message_When_OutputBoard_Is_called()
         {
             // Arrange
-            // Arrange
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
 

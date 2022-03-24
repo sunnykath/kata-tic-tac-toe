@@ -19,7 +19,7 @@ namespace TicTacToe
         public const string DuplicateMoveMessage = "Oh no, a piece is already at this place! Try again...";
         public const string GameWonMessage = "Well done you've won the game!";
         public const string GameDrawnMessage = "The Game has ended in a draw!";
-        public const string BoardPrintedMessage = "Here's the current board:";
+        public const string BoardPrintedMessage = "Here's the board:";
 
         public const string QuitCommand = "q";
     }
