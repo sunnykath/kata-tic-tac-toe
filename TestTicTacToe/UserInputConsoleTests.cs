@@ -120,6 +120,33 @@ namespace TestTicTacToe
             Assert.Contains(Constants.BoardPrintedMessage, actualBoardOutput);
             Assert.Contains(expectedBoardOutput, actualBoardOutput);
         }
+        
+        [Fact]
+        public void Should_Print_The_Board_With_Player_Marks_And_Board_Printing_Message_When_OutputBoard_Is_called()
+        {
+            // Arrange
+            // Arrange
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
 
+            var emptyBoard = new int[3,3]
+            {
+                {1, 0, 0},
+                {0, 0, 2},
+                {1, 0, 2}
+            };
+
+            const string expectedBoardOutput = "X . . \n. . O \nX . O \n";
+    
+            var uiConsole = new UserInputConsole();
+
+            // Act
+            uiConsole.OutputBoard(emptyBoard);
+            var actualBoardOutput = stringWriter.ToString();
+    
+            // Assert
+            Assert.Contains(Constants.BoardPrintedMessage, actualBoardOutput);
+            Assert.Contains(expectedBoardOutput, actualBoardOutput);
+        }
     }
 }
