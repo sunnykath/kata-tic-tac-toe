@@ -23,9 +23,10 @@ namespace TicTacToe
         public void Play()
         {
             var uiConsole = new UserInputConsole();
-            
+
             while (_gameStatus is GameStatus.Playing)
             {
+                uiConsole.OutputBoard(_boardArray);
                 uiConsole.UpdatePlayerInput(_player);
                 
                 if (uiConsole.PlayerHasGivenUp())
