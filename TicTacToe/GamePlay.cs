@@ -7,47 +7,65 @@ namespace TicTacToe
     {
         private int _player;
         private GameStatus _gameStatus;
-        private Board _board;
-        private int[,] _boardArray;
+        private readonly Board _board;
+        private readonly int[,] _boardArray;
+        private bool _givenUp;
         
         public GamePlay()
         {
             _board = new Board();
             _boardArray = _board.GetBoard();
             _player = RandomlyPickPlayerForFirst();
+            _givenUp = false;
+            _gameStatus = GameStatus.Playing;
         }
 
         public void Play()
         {
             var uiConsole = new UserInputConsole();
-
-            while (_gameStatus != GameStatus.Quit)
-            {
-                // Get Player Input
-                uiConsole.UpdatePlayerInput(_player);
-
-                // Check if quit
-                _gameStatus = uiConsole.PlayerHasGivenUp() ? GameStatus.Quit : CheckGameStatus();
             
-                if (_gameStatus == GameStatus.Quit)
+            while (_gameStatus is GameStatus.Playing)
+            {
+                uiConsole.UpdatePlayerInput(_player);
+                
+                if (uiConsole.PlayerHasGivenUp())
                 {
-                    uiConsole.OutputMessage(Constants.GameQuitMessage);
+                    _givenUp = true;
                 }
                 else
                 {
                     var inputMove = uiConsole.GetPlayerMove();
-                    if (GameRulesHandler.IsADuplicateMove(_boardArray, inputMove))
-                    {
-                        uiConsole.OutputMessage(Constants.DuplicateMoveMessage);
-                    }
-                    else
-                    {
-                        _board.PlaceMarker(inputMove, _player);
-                        uiConsole.OutputMessage(Constants.MoveAcceptedMessage);   
-                    }
+                    string outputMessage = HandleMoveInput(inputMove);
+                    uiConsole.OutputMessage(outputMessage);
                 }
-                SwapPlayer();
+                UpdateGameStatus();
             }
+
+            switch (_gameStatus)
+            {
+                case GameStatus.Quit:
+                    uiConsole.OutputMessage(Constants.GameQuitMessage);
+                    break;
+                case GameStatus.Won:
+                    uiConsole.OutputMessage(Constants.GameWonMessage);
+                    break;
+                case GameStatus.Draw:
+                    uiConsole.OutputMessage(Constants.GameDrawnMessage);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private string HandleMoveInput(Move inputMove)
+        {
+            if (GameRulesHandler.IsADuplicateMove(_boardArray, inputMove))
+            {
+                return Constants.DuplicateMoveMessage;
+            }
+            _board.PlaceMarker(inputMove, _player);
+            SwapPlayer();
+            return Constants.MoveAcceptedMessage;
         }
         
         public int GetPlayer()
@@ -86,11 +104,10 @@ namespace TicTacToe
         }
 
 
-        private GameStatus CheckGameStatus()   
+        private void UpdateGameStatus()   
         {
-            _gameStatus = GameRulesHandler.HasWon(_boardArray) ? GameStatus.Won : (GameRulesHandler.HasDrawn(_boardArray) ? GameStatus.Draw : GameStatus.Playing);
+            _gameStatus = GameRulesHandler.HasWon(_boardArray) ? GameStatus.Won : (GameRulesHandler.HasDrawn(_boardArray) ? GameStatus.Draw : (_givenUp ? GameStatus.Quit : GameStatus.Playing));
             
-            return _gameStatus;
         }
 
 
@@ -99,7 +116,7 @@ namespace TicTacToe
             return _gameStatus;
         }
 
-        public int[,] GetBoard()
+        public int[,] GetBoardArray()
         {
             return _boardArray;
         }
