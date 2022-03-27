@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Runtime.InteropServices.ComTypes;
 using TicTacToe;
 using Xunit;
 
@@ -103,7 +102,7 @@ namespace TestTicTacToe
 
             var game = new GamePlay();
             var player = game.GetPlayer();
-            var otherPlayer = player == Constants.PlayerO.value ? Constants.PlayerX.value : Constants.PlayerO.value;
+            var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             var expectedBoard = new[,]
             {
                 {player, otherPlayer, 0},
@@ -160,7 +159,7 @@ namespace TestTicTacToe
 
             var game = new GamePlay();
             var player = game.GetPlayer();
-            var otherPlayer = player == Constants.PlayerO.value ? Constants.PlayerX.value : Constants.PlayerO.value;
+            var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             
             var expectedBoard = new [,]
             {
@@ -195,7 +194,7 @@ namespace TestTicTacToe
 
             var game = new GamePlay();
             var player = game.GetPlayer();
-            var otherPlayer = player == Constants.PlayerO.value ? Constants.PlayerX.value : Constants.PlayerO.value;
+            var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             
             var expectedBoard = new [,]
             {
@@ -230,7 +229,7 @@ namespace TestTicTacToe
 
             var game = new GamePlay();
             var player = game.GetPlayer();
-            var otherPlayer = player == Constants.PlayerO.value ? Constants.PlayerX.value : Constants.PlayerO.value;
+            var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             var expectedBoard = new[,]
             {
                 {player, otherPlayer, 0},
@@ -266,7 +265,7 @@ namespace TestTicTacToe
 
             var game = new GamePlay();
             var player = game.GetPlayer();
-            var otherPlayer = player == Constants.PlayerO.value ? Constants.PlayerX.value : Constants.PlayerO.value;
+            var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             var expectedBoard = new [,]
             {
                 {player, otherPlayer, 0},

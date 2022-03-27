@@ -3,11 +3,13 @@ namespace TicTacToe
 {
     public static class Constants
     {
-        public static readonly (int value, string mark) EmptyCell = (0, ".");
+        public const int EmptyCellValue = 0;
+        public const string EmptyCellMark = ".";
         
-        public static readonly (int value, string mark) PlayerX = (1, "X");
-        public static readonly (int value, string mark) PlayerO = (2, "O");
-        
+        public const int PlayerXValue = 1;
+        public const string PlayerXMark = "X";
+        public const int PlayerOValue = 2;
+        public const string PlayerOMark = "O";
 
         public const int IndexingAdjustment = 1;
 

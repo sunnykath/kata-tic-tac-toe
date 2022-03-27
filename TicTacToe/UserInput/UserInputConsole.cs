@@ -76,7 +76,7 @@ namespace TicTacToe.UserInput
                 for (var col = 0; col < board.GetLength(1); col++)
                 {
                     var cell = board[row, col];
-                    printedRow += cell == Constants.PlayerO.value ? Constants.PlayerO.mark : (cell == Constants.PlayerX.value ? Constants.PlayerX.mark : Constants.EmptyCell.mark);
+                    printedRow += cell == Constants.PlayerOValue ? Constants.PlayerOMark : (cell == Constants.PlayerXValue ? Constants.PlayerXMark : Constants.EmptyCellMark);
                     printedRow += " ";
                 }
                 Console.Write($"{printedRow}\n");
