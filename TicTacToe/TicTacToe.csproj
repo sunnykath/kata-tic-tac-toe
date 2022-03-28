@@ -7,4 +7,16 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Compile Remove="UserInput\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="UserInput\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="UserInput\**" />
+    </ItemGroup>
+
 </Project>
