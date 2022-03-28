@@ -1,16 +1,17 @@
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 
-namespace TicTacToe.UserInput
+namespace TicTacToe
 {
-    public class UserInputConsole : IUserInput
+    public class UserInputConsole
     {
         private Move _moveInput = new Move(-1,-1);
         private bool _hasGivenUp;
 
         public void UpdatePlayerInput(int player)
         {
-            Console.Write($"Player {player} enter a coord x,y to place your X or enter 'q' to give up: ");
+            Console.Write($"Player {player} enter a coord x,y to place your {GetPlayerMark(player)} or enter 'q' to give up: ");
 
             var playerInput = GetValidatedInput();
 
@@ -76,7 +77,7 @@ namespace TicTacToe.UserInput
                 for (var col = 0; col < board.GetLength(1); col++)
                 {
                     var cell = board[row, col];
-                    printedRow += cell == Constants.PlayerOValue ? Constants.PlayerOMark : (cell == Constants.PlayerXValue ? Constants.PlayerXMark : Constants.EmptyCellMark);
+                    printedRow += GetPlayerMark(cell);
                     printedRow += " ";
                 }
                 Console.Write($"{printedRow}\n");
@@ -86,6 +87,17 @@ namespace TicTacToe.UserInput
         public void OutputMessage(string message)
         {
             Console.WriteLine(message);
+        }
+
+        private static string GetPlayerMark(int player)
+        {
+            var mark = player switch
+            {
+                Constants.PlayerOValue => Constants.PlayerOMark,
+                Constants.PlayerXValue => Constants.PlayerXMark,
+                _ => Constants.EmptyCellMark
+            };
+            return mark;
         }
     }
 }
