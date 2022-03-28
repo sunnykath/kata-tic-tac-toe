@@ -7,29 +7,29 @@ namespace TestTicTacToe
     public class InputValidatorTest
     {
         [Theory]
-        [InlineData("3,3", "^[1-3],[1-3]$")]
-        [InlineData("1,1", "^[1-3],[1-3]$")]
-        [InlineData("2,2", "^[1-3],[1-3]$")]
-        [InlineData("1,3", "^[1-3],[1-3]$")]
-        public void Should_Equal_True_If_Input_Is_Valid(string input, string regex)
+        [InlineData("3,3")]
+        [InlineData("1,1")]
+        [InlineData("2,2")]
+        [InlineData("1,3")]
+        public void Should_Equal_True_If_Input_Is_Valid(string input)
         {
             // Act
-            var result = InputValidator.CheckInput(regex, input);
+            var result = InputValidator.CheckInput(Constants.ValidMoveRegularExpression, input);
             //Assert
             Assert.True(result);
         }
 
         [Theory]
-        [InlineData("3,4", "^[1-3],[1-3]$")]
-        [InlineData("5,5", "^[1-3],[1-3]$")]
-        [InlineData("", "^[1-3],[1-3]$")]
-        [InlineData(",", "^[1-3],[1-3]$")]
-        [InlineData("1,a", "^[1-3],[1-3]$")]
-        [InlineData("sun", "^[1-3],[1-3]$")]
-        public void Should_Equal_False_If_Input_Is_Invalid(string input, string regex)
+        [InlineData("3,4")]
+        [InlineData("5,5")]
+        [InlineData("")]
+        [InlineData(",")]
+        [InlineData("1,a")]
+        [InlineData("sun")]
+        public void Should_Equal_False_If_Input_Is_Invalid(string input)
         {
             // Act
-            var result = InputValidator.CheckInput(regex, input);
+            var result = InputValidator.CheckInput(Constants.ValidMoveRegularExpression, input);
             //Assert
             Assert.False(result);
         }

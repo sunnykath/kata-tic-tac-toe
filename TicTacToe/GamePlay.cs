@@ -42,7 +42,27 @@ namespace TicTacToe
             uiConsole.OutputMessage(finalMessage);
             uiConsole.OutputBoard(_boardArray);
         }
+        
+        public int GetPlayer()
+        {
+            return _player;
+        }
+        
+        public void SwapPlayer()
+        {
+            _player = _player == Constants.PlayerXValue ? Constants.PlayerOValue : Constants.PlayerXValue;
+        }
+        
+        public GameStatus GetCurrentStatus()
+        {
+            return _gameStatus;
+        }
 
+        public int[,] GetBoardArray()
+        {
+            return _boardArray;
+        }
+        
         private string HandleEndOfGame()
         {
             var message = _gameStatus switch
@@ -66,35 +86,15 @@ namespace TicTacToe
             return Constants.MoveAcceptedMessage;
         }
         
-        public int GetPlayer()
-        {
-            return _player;
-        }
-        
         private static int RandomlyPickPlayerForFirst()
         {
             var rand = new Random();
             return rand.Next(Constants.PlayerXValue, Constants.PlayerOValue);
         }
-        public void SwapPlayer()
-        {
-            _player = _player == Constants.PlayerXValue ? Constants.PlayerOValue : Constants.PlayerXValue;
-        }
         
         private void UpdateGameStatus()   
         {
             _gameStatus = GameRulesHandler.HasWon(_boardArray) ? GameStatus.Won : (GameRulesHandler.HasDrawn(_boardArray) ? GameStatus.Draw : (_givenUp ? GameStatus.Quit : GameStatus.Playing));
-            
-        }
-        
-        public GameStatus GetCurrentStatus()
-        {
-            return _gameStatus;
-        }
-
-        public int[,] GetBoardArray()
-        {
-            return _boardArray;
         }
     }
 }

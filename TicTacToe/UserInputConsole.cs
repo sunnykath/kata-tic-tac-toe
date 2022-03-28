@@ -25,6 +25,38 @@ namespace TicTacToe
             }
         }
 
+        public bool PlayerHasGivenUp()
+        {
+            return _hasGivenUp;
+        }
+        
+        public Move GetPlayerMove()
+        {
+            return _moveInput;
+        }
+
+        public void OutputBoard(int[,] board)
+        {
+            Console.WriteLine(Constants.BoardPrintedMessage);
+            
+            for (var row = 0; row < board.GetLength(0); row++)
+            {
+                var printedRow = "";
+                for (var col = 0; col < board.GetLength(1); col++)
+                {
+                    var cell = board[row, col];
+                    printedRow += GetPlayerMark(cell);
+                    printedRow += " ";
+                }
+                Console.Write($"{printedRow}\n");
+            }
+        }
+
+        public void OutputMessage(string message)
+        {
+            Console.WriteLine(message);
+        }
+        
         private string GetValidatedInput()
         {
             var isAValidMoveInput = true;
@@ -57,38 +89,6 @@ namespace TicTacToe
             _moveInput = new Move(moveCoords[0] - Constants.IndexingAdjustment, moveCoords[1] - Constants.IndexingAdjustment);
         }
         
-        public bool PlayerHasGivenUp()
-        {
-            return _hasGivenUp;
-        }
-        
-        public Move GetPlayerMove()
-        {
-            return _moveInput;
-        }
-
-        public void OutputBoard(int[,] board)
-        {
-            Console.WriteLine(Constants.BoardPrintedMessage);
-            
-            for (var row = 0; row < board.GetLength(0); row++)
-            {
-                var printedRow = "";
-                for (var col = 0; col < board.GetLength(1); col++)
-                {
-                    var cell = board[row, col];
-                    printedRow += GetPlayerMark(cell);
-                    printedRow += " ";
-                }
-                Console.Write($"{printedRow}\n");
-            }
-        }
-
-        public void OutputMessage(string message)
-        {
-            Console.WriteLine(message);
-        }
-
         private static string GetPlayerMark(int player)
         {
             var mark = player switch

@@ -19,6 +19,7 @@ namespace TicTacToe
         {
             return IsARowWin(boardArray) || IsAColumnWin(boardArray) || IsADiagonalWin(boardArray);
         }
+        
         private static bool IsARowWin(int[,] boardArray)
         {
             for (var i = 0; i < boardArray.GetLength(0); i++)
@@ -30,6 +31,7 @@ namespace TicTacToe
             }
             return false;
         }
+        
         private static bool IsAColumnWin(int[,] boardArray)
         {
             for (var i = 0; i < boardArray.GetLength(1); i++)
@@ -41,6 +43,7 @@ namespace TicTacToe
             }
             return false;
         }
+        
         private static bool IsADiagonalWin(int[,] boardArray)
         {
             return boardArray[1,1] != 0 && (CheckEquivalence(boardArray[1, 1], boardArray[2, 2],boardArray[0, 0]) 

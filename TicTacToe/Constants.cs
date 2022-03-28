@@ -15,6 +15,8 @@ namespace TicTacToe
 
         public const string ValidMoveRegularExpression = "^[1-3],[1-3]$";
 
+        public const string QuitCommand = "q";
+
         public const string InvalidInputErrorMessage = "Invalid Input, please try again: ";
         public const string MoveAcceptedMessage = "Move Accepted.";
         public const string GameQuitMessage = "You have given up.";
@@ -22,7 +24,5 @@ namespace TicTacToe
         public const string GameWonMessage = "Well done you've won the game!";
         public const string GameDrawnMessage = "The Game has ended in a draw!";
         public const string BoardPrintedMessage = "Here's the board:";
-
-        public const string QuitCommand = "q";
     }
 }

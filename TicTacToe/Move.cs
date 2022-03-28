@@ -7,8 +7,8 @@ namespace TicTacToe
 
         public Move(int coordX, int coordY)
         {
-            this._coordX = coordX;
-            this._coordY = coordY;
+            _coordX = coordX;
+            _coordY = coordY;
         }
 
         public (int, int) GetCoord()
