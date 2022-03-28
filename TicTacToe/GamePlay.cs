@@ -1,5 +1,4 @@
 using System;
-using TicTacToe.UserInput;
 
 namespace TicTacToe
 {
@@ -23,12 +22,10 @@ namespace TicTacToe
         public void Play()
         {
             var uiConsole = new UserInputConsole();
-
             while (_gameStatus is GameStatus.Playing)
             {
                 uiConsole.OutputBoard(_boardArray);
                 uiConsole.UpdatePlayerInput(_player);
-                
                 if (uiConsole.PlayerHasGivenUp())
                 {
                     _givenUp = true;
@@ -41,23 +38,21 @@ namespace TicTacToe
                 }
                 UpdateGameStatus();
             }
-
-            switch (_gameStatus)
-            {
-                case GameStatus.Quit:
-                    uiConsole.OutputMessage(Constants.GameQuitMessage);
-                    break;
-                case GameStatus.Won:
-                    uiConsole.OutputMessage(Constants.GameWonMessage);
-                    break;
-                case GameStatus.Draw:
-                    uiConsole.OutputMessage(Constants.GameDrawnMessage);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            var finalMessage = HandleEndOfGame();
+            uiConsole.OutputMessage(finalMessage);
             uiConsole.OutputBoard(_boardArray);
+        }
 
+        private string HandleEndOfGame()
+        {
+            var message = _gameStatus switch
+            {
+                GameStatus.Quit => (Constants.GameQuitMessage),
+                GameStatus.Won => (Constants.GameWonMessage),
+                GameStatus.Draw => (Constants.GameDrawnMessage),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            return message;
         }
 
         private string HandleMoveInput(Move inputMove)
