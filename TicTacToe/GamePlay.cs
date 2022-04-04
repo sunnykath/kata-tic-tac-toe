@@ -14,7 +14,7 @@ namespace TicTacToe
         {
             _board = new Board();
             _boardArray = _board.GetBoard();
-            _player = RandomlyPickPlayerForFirst();
+            _player = Constants.PlayerXValue;
             _givenUp = false;
             _gameStatus = GameStatus.Playing;
         }
@@ -84,12 +84,6 @@ namespace TicTacToe
             _board.PlaceMarker(inputMove, _player);
             SwapPlayer();
             return Constants.MoveAcceptedMessage;
-        }
-        
-        private static int RandomlyPickPlayerForFirst()
-        {
-            var rand = new Random();
-            return rand.Next(Constants.PlayerXValue, Constants.PlayerOValue);
         }
         
         private void UpdateGameStatus()   
