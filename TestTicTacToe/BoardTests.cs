@@ -6,7 +6,27 @@ namespace TestTicTacToe
     public class BoardTests
     {
         [Fact]
-        public void Should_Place_Marker_In_The_Correct_Position_If_Empty_Cell()
+        public void Should_Return_An_Empty_Board_When_A_New_Board_Is_Instantiated()
+        {
+            // Arrange
+            var board = new Board();
+            
+            var expectedBoard = new[,]
+            {
+                {0, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0}
+            };
+        
+            // Act
+            var actualBoard = board.GetBoard();
+        
+            // Assert
+            Assert.Equal(expectedBoard, actualBoard);
+        }
+        
+        [Fact]
+        public void Should_Place_Marker_In_The_Correct_Position()
         {
             // Arrange 
             var board = new Board();
