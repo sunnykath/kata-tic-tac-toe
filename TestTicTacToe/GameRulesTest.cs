@@ -53,10 +53,10 @@ namespace TestTicTacToe
         public void Should_Return_False_When_Player_Has_Not_Won_The_Game(int[,] gameInProgressBoard)
         {
             // Act
-            var hasWonGame = GameRulesHandler.HasWon(gameInProgressBoard);
+            var isWonGame = GameRulesHandler.HasWon(gameInProgressBoard);
         
             // Assert
-            Assert.False(hasWonGame);
+            Assert.False(isWonGame);
         }
         
         
@@ -105,10 +105,10 @@ namespace TestTicTacToe
         public void Should_Return_True_When_Player_Has_Won_The_Game(int[,] gameWonBoard)
         {
             // Act
-            var hasWonGame = GameRulesHandler.HasWon(gameWonBoard);
+            var isWonGame = GameRulesHandler.HasWon(gameWonBoard);
         
             // Assert
-            Assert.True(hasWonGame);
+            Assert.True(isWonGame);
         }
 
         [Fact]
