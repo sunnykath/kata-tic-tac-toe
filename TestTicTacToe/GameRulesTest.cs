@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using TicTacToe;
 using Xunit;
 
@@ -6,152 +8,104 @@ namespace TestTicTacToe
     public class GameRulesTest
     {
 
-        [Fact]
-        public void Should_Return_False_When_3_In_A_Row_Horizontally_Of_Different_Players_Marks()
+        public static IEnumerable<object[]> GetInProgressBoards()
         {
-            // Arrange
-            var gameLosingBoard = new[,]
+            yield return new object[]
             {
-                {1, 2, 1},
-                {0, 0, 0},
-                {0, 0, 0}
+                new[,]
+                {
+                    {1, 2, 1},
+                    {0, 0, 0},
+                    {0, 0, 0}
+                }
             };
-        
-            // Act
-            var hasWonGame = GameRulesHandler.HasWon(gameLosingBoard);
-        
-            // Assert
-            Assert.False(hasWonGame);
-        }
-        
-        
-        [Fact]
-        public void Should_Return_False_When_3_In_A_Row_Vertically_Of_Different_Players_Marks()
-        {
-            // Arrange 
-            var gameLosingBoard = new[,]
+            yield return new object[]
             {
-                {0, 1, 0},
-                {0, 1, 0},
-                {0, 2, 0}
-            };       
-        
-            // Act
-            var hasWonGame = GameRulesHandler.HasWon(gameLosingBoard);
-        
-            // Assert
-            Assert.False(hasWonGame);
+                new[,]
+                {
+                    {0, 1, 0},
+                    {0, 1, 0},
+                    {0, 2, 0}
+                }
+            };
+            yield return new object[]
+            {
+                new[,]
+                {
+                    {2, 0, 0},
+                    {0, 1, 0},
+                    {0, 0, 1}
+                }
+            };
+            yield return new object[]
+            {
+                new[,]
+                {
+                    {0, 0, 1},
+                    {0, 2, 0},
+                    {1, 0, 0}
+                }
+            };
         }
 
-        [Fact]
-        public void Should_Return_False_When_3_In_A_Row_Diagonally_As_Forward_Slash_Of_Different_Players_Marks()
+        [Theory]
+        [MemberData(nameof(GetInProgressBoards))]
+        public void Should_Return_False_When_Player_Has_Not_Won_The_Game(int[,] gameInProgressBoard)
         {
-            // Arrange 
-            var gameLosingBoard = new[,]
-            {
-                {2, 0, 0},
-                {0, 1, 0},
-                {0, 0, 1}
-            };
-        
-        
             // Act
-            var hasWonGame = GameRulesHandler.HasWon(gameLosingBoard);
-        
-            // Assert
-            Assert.False(hasWonGame);
-        }
-        
-        [Fact]
-        public void Should_Return_False_When_3_In_A_Row_Diagonally_As_Backward_Slash_Of_Different_Players_Marks()
-        {
-            // Arrange 
-            var gameLosingBoard = new[,]
-            {
-                {0, 0, 1},
-                {0, 2, 0},
-                {1, 0, 0}
-            };
-        
-        
-            // Act
-            var hasWonGame = GameRulesHandler.HasWon(gameLosingBoard);
+            var hasWonGame = GameRulesHandler.HasWon(gameInProgressBoard);
         
             // Assert
             Assert.False(hasWonGame);
         }
         
         
-        [Fact]
-        public void Should_Return_True_When_GameStatus_Is_Checked_If_3_In_A_Row_Horizontally()
+        public static IEnumerable<object[]> GetWinningBoards()
         {
-            // Arrange
-            var gameWinningBoard = new[,]
+            yield return new object[]
             {
-                {1, 1, 1},
-                {0, 0, 0},
-                {0, 0, 0}
+                new[,]
+                {
+                    {1, 1, 1},
+                    {0, 0, 0},
+                    {0, 0, 0}
+                }
             };
-        
-            // Act
-            var hasWonGame = GameRulesHandler.HasWon(gameWinningBoard);
-        
-            // Assert
-            Assert.True(hasWonGame);
-        }
-        
-        [Fact]
-        public void Should_Return_True_When_GameStatus_Is_Checked_If_3_In_A_Row_Vertically()
-        {
-            // Arrange 
-            var gameWinningBoard = new[,]
+            yield return new object[]
             {
-                {0, 1, 0},
-                {0, 1, 0},
-                {0, 1, 0}
-            };       
-        
-            // Act
-            var hasWonGame = GameRulesHandler.HasWon(gameWinningBoard);
-        
-            // Assert
-            Assert.True(hasWonGame); 
+                new[,]
+                {
+                    {0, 1, 0},
+                    {0, 1, 0},
+                    {0, 1, 0}
+                }
+            };
+            yield return new object[]
+            {
+                new[,]
+                {
+                    {1, 0, 0},
+                    {0, 1, 0},
+                    {0, 0, 1}
+                }
+            };
+            yield return new object[]
+            {
+                new[,]
+                {
+                    {0, 0, 1},
+                    {0, 1, 0},
+                    {1, 0, 0}
+                }
+            };
+        }
 
-            
-        }
-        
-        [Fact]
-        public void Should_Return_True_When_GameStatus_Is_Checked_If_3_In_A_Row_Diagonally_As_Forward_Slash()
+        [Theory]
+        [MemberData(nameof(GetWinningBoards))]
+        public void Should_Return_True_When_Player_Has_Won_The_Game(int[,] gameWonBoard)
         {
-            // Arrange 
-            var gameWinningBoard = new[,]
-            {
-                {1, 0, 0},
-                {0, 1, 0},
-                {0, 0, 1}
-            };
-        
-        
             // Act
-            var hasWonGame = GameRulesHandler.HasWon(gameWinningBoard);
-        
-            // Assert
-            Assert.True(hasWonGame);
-        }
-        
-        [Fact]
-        public void Should_Return_True_When_GameStatus_Is_Checked_If_3_In_A_Row_Diagonally_As_Backward_Slash()
-        {
-            // Arrange 
-            var gameWinningBoard = new[,]
-            {
-                {0, 0, 1},
-                {0, 1, 0},
-                {1, 0, 0}
-            };
-        
-            // Act
-            var hasWonGame = GameRulesHandler.HasWon(gameWinningBoard);
+            var hasWonGame = GameRulesHandler.HasWon(gameWonBoard);
         
             // Assert
             Assert.True(hasWonGame);
@@ -198,7 +152,7 @@ namespace TestTicTacToe
         public void Should_Return_True_When_A_Duplicate_Move_Is_Made()
         {
             // Arrange 
-            var gameDrawnBoard = new[,]
+            var gameBoard = new[,]
             {
                 {1, 0, 0},
                 {0, 0, 0},
@@ -207,7 +161,7 @@ namespace TestTicTacToe
             var duplicateMove = new Move(0, 0);
         
             // Act
-            var isDuplicateMove = GameRulesHandler.IsADuplicateMove(gameDrawnBoard, duplicateMove);
+            var isDuplicateMove = GameRulesHandler.IsADuplicateMove(gameBoard, duplicateMove);
         
             // Assert
             Assert.True(isDuplicateMove);
