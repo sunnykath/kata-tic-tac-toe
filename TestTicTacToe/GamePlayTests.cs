@@ -15,9 +15,9 @@ namespace TestTicTacToe
             var game = new GamePlay();
             
             // Act
-            var initialPlayer = game.GetPlayer();
+            var initialPlayer = game.GetCurrentPlayer();
             game.SwapPlayer();
-            var swappedPlayer = game.GetPlayer();
+            var swappedPlayer = game.GetCurrentPlayer();
 
             // Assert 
             Assert.NotEqual(initialPlayer, swappedPlayer);
@@ -31,10 +31,10 @@ namespace TestTicTacToe
             var game = new GamePlay();
             
             // Act
-            var initialPlayer = game.GetPlayer();
+            var initialPlayer = game.GetCurrentPlayer();
             game.SwapPlayer();
             game.SwapPlayer();
-            var swappedPlayer = game.GetPlayer();
+            var swappedPlayer = game.GetCurrentPlayer();
 
             // Assert 
             Assert.Equal(initialPlayer, swappedPlayer);
@@ -75,7 +75,7 @@ namespace TestTicTacToe
             Console.SetIn(stringReader);
 
             var game = new GamePlay();
-            var player = game.GetPlayer();
+            var player = game.GetCurrentPlayer();
             var expectedBoard = new [,]
             {
                 {player, 0, 0},
@@ -101,7 +101,7 @@ namespace TestTicTacToe
             Console.SetIn(stringReader);
 
             var game = new GamePlay();
-            var player = game.GetPlayer();
+            var player = game.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             var expectedBoard = new[,]
             {
@@ -129,7 +129,7 @@ namespace TestTicTacToe
             Console.SetIn(stringReader);
 
             var game = new GamePlay();
-            var player = game.GetPlayer();
+            var player = game.GetCurrentPlayer();
             var expectedBoard = new[,]
             {
                 {player, 0, 0},
@@ -158,7 +158,7 @@ namespace TestTicTacToe
             Console.SetIn(stringReader);
 
             var game = new GamePlay();
-            var player = game.GetPlayer();
+            var player = game.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             
             var expectedBoard = new [,]
@@ -193,7 +193,7 @@ namespace TestTicTacToe
             Console.SetIn(stringReader);
 
             var game = new GamePlay();
-            var player = game.GetPlayer();
+            var player = game.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             
             var expectedBoard = new [,]
@@ -228,7 +228,7 @@ namespace TestTicTacToe
             Console.SetIn(stringReader);
 
             var game = new GamePlay();
-            var player = game.GetPlayer();
+            var player = game.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             var expectedBoard = new[,]
             {
@@ -264,7 +264,7 @@ namespace TestTicTacToe
             Console.SetIn(stringReader);
 
             var game = new GamePlay();
-            var player = game.GetPlayer();
+            var player = game.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             var expectedBoard = new [,]
             {
