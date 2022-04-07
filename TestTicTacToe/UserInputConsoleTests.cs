@@ -7,13 +7,15 @@ namespace TestTicTacToe
 {
     public class UserInputConsoleTests
     {
-
+        private readonly StringWriter _stringWriter = new StringWriter();
+        
         [Fact]
         public void Should_Ask_For_Input_Again_When_Invalid_Input_Is_Given_For_The_Players_Move()
         {
             // Arrange
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
+            _stringWriter.Flush();
+            // >>
+            Console.SetOut(_stringWriter);
 
             var stringReader = new StringReader("1 1\n1,1");
             Console.SetIn(stringReader);
@@ -23,7 +25,7 @@ namespace TestTicTacToe
             
             // Act
             uiConsole.UpdatePlayerInput(player);
-            var actualString = stringWriter.ToString();
+            var actualString = _stringWriter.ToString();
             
             // Assert
             Assert.Contains(Constants.InvalidInputErrorMessage, actualString);
@@ -96,8 +98,8 @@ namespace TestTicTacToe
         public void Should_Print_An_Empty_Board_With_Dots_Representing_Empty_Cells_And_Board_Printing_Message_When_OutputBoard_Is_called()
         {
             // Arrange
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
+            _stringWriter.Flush();
+            Console.SetOut(_stringWriter);
 
             var emptyBoard = new[,]
             {
@@ -106,13 +108,14 @@ namespace TestTicTacToe
                 {0, 0, 0}
             };
 
+            //@Improvement: Use constants instead of hard coded strings
             const string expectedBoardOutput = ". . . \n. . . \n. . . \n";
     
             var uiConsole = new UserInputConsole();
 
             // Act
             uiConsole.OutputBoard(emptyBoard);
-            var actualBoardOutput = stringWriter.ToString();
+            var actualBoardOutput = _stringWriter.ToString();
     
             // Assert
             Assert.Contains(Constants.BoardPrintedMessage, actualBoardOutput);
@@ -123,8 +126,8 @@ namespace TestTicTacToe
         public void Should_Print_The_Board_With_Player_Marks_And_Board_Printing_Message_When_OutputBoard_Is_called()
         {
             // Arrange
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
+            _stringWriter.Flush();
+            Console.SetOut(_stringWriter);
 
             var emptyBoard = new[,]
             {
@@ -139,7 +142,7 @@ namespace TestTicTacToe
 
             // Act
             uiConsole.OutputBoard(emptyBoard);
-            var actualBoardOutput = stringWriter.ToString();
+            var actualBoardOutput = _stringWriter.ToString();
     
             // Assert
             Assert.Contains(Constants.BoardPrintedMessage, actualBoardOutput);

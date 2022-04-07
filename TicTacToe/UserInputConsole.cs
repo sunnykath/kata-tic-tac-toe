@@ -1,12 +1,11 @@
 using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace TicTacToe
 {
     public class UserInputConsole
     {
-        private Move _moveInput = new Move(-1,-1);
+        private Move _moveInputCoords = new Move(-1,-1);
         private bool _hasGivenUp;
 
         public void UpdatePlayerInput(int player)
@@ -32,7 +31,7 @@ namespace TicTacToe
         
         public Move GetPlayerMove()
         {
-            return _moveInput;
+            return _moveInputCoords;
         }
 
         public void OutputBoard(int[,] board)
@@ -86,7 +85,7 @@ namespace TicTacToe
             var inputStrings = playerInput.Split(',');
             var moveCoords = inputStrings.Select(int.Parse).ToList();
 
-            _moveInput = new Move(moveCoords[0] - Constants.IndexingAdjustment, moveCoords[1] - Constants.IndexingAdjustment);
+            _moveInputCoords = new Move(moveCoords[0] - Constants.IndexingAdjustment, moveCoords[1] - Constants.IndexingAdjustment);
         }
         
         private static string GetPlayerMark(int player)

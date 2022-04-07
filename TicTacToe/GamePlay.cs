@@ -19,6 +19,7 @@ namespace TicTacToe
             _gameStatus = GameStatus.Playing;
         }
 
+        //@Improvement: Simplify this function by moving most of the logic to the rules handler 
         public void Play()
         {
             var uiConsole = new UserInputConsole();
@@ -43,7 +44,7 @@ namespace TicTacToe
             uiConsole.OutputBoard(_boardArray);
         }
         
-        public int GetPlayer()
+        public int GetCurrentPlayer()
         {
             return _player;
         }

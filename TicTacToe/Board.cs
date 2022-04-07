@@ -4,6 +4,8 @@ namespace TicTacToe
     {
         private int[,] _boardArray;
         
+        
+        // @Improvement: This board could be of type string as integers are not needed for any real reason
         public Board()
         {
             _boardArray = new[,]
