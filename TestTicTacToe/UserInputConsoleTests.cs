@@ -7,16 +7,18 @@ namespace TestTicTacToe
 {
     public class UserInputConsoleTests
     {
-        private readonly StringWriter _stringWriter = new StringWriter();
+        private readonly StringWriter _stringWriter;
+
+        public UserInputConsoleTests()
+        {
+            _stringWriter = new StringWriter();
+            Console.SetOut(_stringWriter);
+        }
         
         [Fact]
         public void Should_Ask_For_Input_Again_When_Invalid_Input_Is_Given_For_The_Players_Move()
         {
             // Arrange
-            _stringWriter.Flush();
-            // >>
-            Console.SetOut(_stringWriter);
-
             var stringReader = new StringReader("1 1\n1,1");
             Console.SetIn(stringReader);
             
@@ -98,9 +100,6 @@ namespace TestTicTacToe
         public void Should_Print_An_Empty_Board_With_Dots_Representing_Empty_Cells_And_Board_Printing_Message_When_OutputBoard_Is_called()
         {
             // Arrange
-            _stringWriter.Flush();
-            Console.SetOut(_stringWriter);
-
             var emptyBoard = new[,]
             {
                 {0, 0, 0},
@@ -126,9 +125,6 @@ namespace TestTicTacToe
         public void Should_Print_The_Board_With_Player_Marks_And_Board_Printing_Message_When_OutputBoard_Is_called()
         {
             // Arrange
-            _stringWriter.Flush();
-            Console.SetOut(_stringWriter);
-
             var emptyBoard = new[,]
             {
                 {1, 0, 0},

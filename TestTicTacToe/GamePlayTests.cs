@@ -7,7 +7,14 @@ namespace TestTicTacToe
 {
     public class GamePlayTests
     {
+        private readonly StringWriter _stringWriter;
 
+        public GamePlayTests()
+        { 
+            _stringWriter = new StringWriter();
+            Console.SetOut(_stringWriter);
+        }
+        
         [Fact]
         public void Should_Change_Player_When_SwapPlayer_Is_Called()
         {
@@ -45,9 +52,6 @@ namespace TestTicTacToe
         public void Should_End_Game_When_PLayer_Inputs_Quit_Command()
         {
             // Arrange
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-            
             var stringReader = new StringReader("q");
             Console.SetIn(stringReader);
 
@@ -56,7 +60,7 @@ namespace TestTicTacToe
             
             // Act
             game.Play();
-            var actualString = stringWriter.ToString();
+            var actualString = _stringWriter.ToString();
             var actualGameStatus = game.GetCurrentStatus();
             
             // Assert
@@ -68,9 +72,6 @@ namespace TestTicTacToe
         public void Should_Update_The_Board_With_The_Player_Move_Input_And_Output_A_Move_Accepted_Message()
         {
             // Arrange
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-            
             var stringReader = new StringReader("1,1\nq");
             Console.SetIn(stringReader);
 
@@ -85,7 +86,7 @@ namespace TestTicTacToe
             
             // Act
             game.Play();
-            var actualString = stringWriter.ToString();
+            var actualString = _stringWriter.ToString();
             var actualBoard = game.GetBoardArray();
             
             // Assert
@@ -122,9 +123,6 @@ namespace TestTicTacToe
         public void Should_Not_Update_The_Board_With_The_Player_Move_Input_If_A_Duplicate_Move_Is_Entered_And_Output_A_Duplicate_Move_Message()
         {
             // Arrange
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-    
             var stringReader = new StringReader("1,1\n1,1\nq");
             Console.SetIn(stringReader);
 
@@ -139,7 +137,7 @@ namespace TestTicTacToe
     
             // Act
             game.Play();
-            var actualString = stringWriter.ToString();
+            var actualString = _stringWriter.ToString();
             var actualBoard = game.GetBoardArray();
     
             // Assert
@@ -151,9 +149,6 @@ namespace TestTicTacToe
         public void Should_Change_GameStatus_To_Won_When_3_In_A_Row_For_A_Player_And_Output_The_Winning_Message()
         {
             // Arrange
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-    
             var stringReader = new StringReader("1,1\n1,2\n2,1\n2,2\n3,1\n");
             Console.SetIn(stringReader);
 
@@ -172,7 +167,7 @@ namespace TestTicTacToe
     
             // Act
             game.Play();
-            var actualString = stringWriter.ToString();
+            var actualString = _stringWriter.ToString();
             var actualBoard = game.GetBoardArray();
             var actualGameStatus = game.GetCurrentStatus();
     
@@ -186,9 +181,6 @@ namespace TestTicTacToe
         public void Should_Change_GameStatus_To_Draw_When_No_More_Empty_Cells_And_Output_The_Game_Drawn_Message()
         {
             // Arrange
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-    
             var stringReader = new StringReader("1,1\n1,2\n1,3\n2,1\n2,3\n2,2\n3,1\n3,3\n3,2\n");
             Console.SetIn(stringReader);
 
@@ -207,7 +199,7 @@ namespace TestTicTacToe
     
             // Act
             game.Play();
-            var actualString = stringWriter.ToString();
+            var actualString = _stringWriter.ToString();
             var actualBoard = game.GetBoardArray();
             var actualGameStatus = game.GetCurrentStatus();
     
@@ -221,9 +213,6 @@ namespace TestTicTacToe
         public void Should_Print_The_Updated_Board_While_The_Player_Is_Inputting_Moves()
         {
             // Arrange
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-            
             var stringReader = new StringReader("1,1\n1,2\nq");
             Console.SetIn(stringReader);
 
@@ -244,7 +233,7 @@ namespace TestTicTacToe
             // Act
             game.Play();
             var actualBoard = game.GetBoardArray();
-            var actualBoardOutputs = stringWriter.ToString();
+            var actualBoardOutputs = _stringWriter.ToString();
 
             // Assert
             Assert.Equal(expectedBoard, actualBoard);
@@ -257,9 +246,6 @@ namespace TestTicTacToe
         public void Should_Print_The_Final_Board_After_The_Game_Ends()
         {
             // Arrange
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-            
             var stringReader = new StringReader("1,1\n1,2\n2,1\n2,2\n3,1\n");
             Console.SetIn(stringReader);
 
@@ -278,7 +264,7 @@ namespace TestTicTacToe
             // Act
             game.Play();
             var actualBoard = game.GetBoardArray();
-            var actualBoardOutputs = stringWriter.ToString();
+            var actualBoardOutputs = _stringWriter.ToString();
 
             // Assert
             Assert.Equal(expectedBoard, actualBoard);
