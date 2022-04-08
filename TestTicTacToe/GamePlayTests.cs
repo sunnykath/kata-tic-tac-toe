@@ -24,8 +24,6 @@ namespace TestTicTacToe
         [Fact]
         public void Should_Change_Player_When_SwapPlayer_Is_Called()
         {
-            // Arrange 
-            
             // Act
             var initialPlayer = _gamePlay.GetCurrentPlayer();
             _gamePlay.SwapPlayer();
@@ -39,7 +37,6 @@ namespace TestTicTacToe
         [Fact]
         public void Should_Change_Player_To_The_Initial_Player_When_SwapPlayer_Is_Called_Twice()
         {
-            // Arrange 
             // Act
             var initialPlayer = _gamePlay.GetCurrentPlayer();
             _gamePlay.SwapPlayer();
@@ -57,7 +54,8 @@ namespace TestTicTacToe
             // Arrange
             var stringReader = new StringReader("q");
             Console.SetIn(stringReader);
-var expectedGameStatus = GameStatus.Quit;
+            
+            var expectedGameStatus = GameStatus.Quit;
             
             // Act
             _gamePlay.Play();
@@ -75,7 +73,8 @@ var expectedGameStatus = GameStatus.Quit;
             // Arrange
             var stringReader = new StringReader("1,1\nq");
             Console.SetIn(stringReader);
-var player = _gamePlay.GetCurrentPlayer();
+            
+            var player = _gamePlay.GetCurrentPlayer();
             var expectedBoard = new [,]
             {
                 {player, 0, 0},
@@ -99,7 +98,8 @@ var player = _gamePlay.GetCurrentPlayer();
             // Arrange
             var stringReader = new StringReader("1,1\n1,2\nq");
             Console.SetIn(stringReader);
-var player = _gamePlay.GetCurrentPlayer();
+            
+            var player = _gamePlay.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             var expectedBoard = new[,]
             {
@@ -122,7 +122,8 @@ var player = _gamePlay.GetCurrentPlayer();
             // Arrange
             var stringReader = new StringReader("1,1\n1,1\nq");
             Console.SetIn(stringReader);
-var player = _gamePlay.GetCurrentPlayer();
+            
+            var player = _gamePlay.GetCurrentPlayer();
             var expectedBoard = new[,]
             {
                 {player, 0, 0},
@@ -146,7 +147,8 @@ var player = _gamePlay.GetCurrentPlayer();
             // Arrange
             var stringReader = new StringReader("1,1\n1,2\n2,1\n2,2\n3,1\n");
             Console.SetIn(stringReader);
-var player = _gamePlay.GetCurrentPlayer();
+            
+            var player = _gamePlay.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             
             var expectedBoard = new [,]
@@ -176,7 +178,8 @@ var player = _gamePlay.GetCurrentPlayer();
             // Arrange
             var stringReader = new StringReader("1,1\n1,2\n1,3\n2,1\n2,3\n2,2\n3,1\n3,3\n3,2\n");
             Console.SetIn(stringReader);
-var player = _gamePlay.GetCurrentPlayer();
+            
+            var player = _gamePlay.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             
             var expectedBoard = new [,]
@@ -206,7 +209,8 @@ var player = _gamePlay.GetCurrentPlayer();
             // Arrange
             var stringReader = new StringReader("1,1\n1,2\nq");
             Console.SetIn(stringReader);
-var player = _gamePlay.GetCurrentPlayer();
+    
+            var player = _gamePlay.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             var expectedBoard = new[,]
             {
@@ -237,7 +241,8 @@ var player = _gamePlay.GetCurrentPlayer();
             // Arrange
             var stringReader = new StringReader("1,1\n1,2\n2,1\n2,2\n3,1\n");
             Console.SetIn(stringReader);
-var player = _gamePlay.GetCurrentPlayer();
+
+            var player = _gamePlay.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             var expectedBoard = new [,]
             {
