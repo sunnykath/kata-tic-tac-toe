@@ -1,4 +1,5 @@
 using System;
+using TicTacToe.Rules;
 
 namespace TicTacToe
 {
@@ -9,39 +10,42 @@ namespace TicTacToe
         private readonly Board _board;
         private readonly int[,] _boardArray;
         private bool _givenUp;
+        private readonly UserInputConsole _uiConsole;
+        private readonly IRules _rules;
         
-        public GamePlay()
+        public GamePlay(UserInputConsole uiConsole, IRules rules)
         {
             _board = new Board();
             _boardArray = _board.GetBoard();
             _player = Constants.PlayerXValue;
             _givenUp = false;
             _gameStatus = GameStatus.Playing;
+            _uiConsole = uiConsole;
+            _rules = rules;
         }
 
         //@Improvement: Simplify this function by moving most of the logic to the rules handler 
         public void Play()
         {
-            var uiConsole = new UserInputConsole();
             while (_gameStatus is GameStatus.Playing)
             {
-                uiConsole.OutputBoard(_boardArray);
-                uiConsole.UpdatePlayerInput(_player);
-                if (uiConsole.PlayerHasGivenUp())
+                _uiConsole.OutputBoard(_boardArray);
+                _uiConsole.UpdatePlayerInput(_player);
+                if (_uiConsole.PlayerHasGivenUp())
                 {
                     _givenUp = true;
                 }
                 else
                 {
-                    var inputMove = uiConsole.GetPlayerMove();
+                    var inputMove = _uiConsole.GetPlayerMove();
                     string outputMessage = HandleMoveInput(inputMove);
-                    uiConsole.OutputMessage(outputMessage);
+                    _uiConsole.OutputMessage(outputMessage);
                 }
                 UpdateGameStatus();
             }
             var finalMessage = HandleEndOfGame();
-            uiConsole.OutputMessage(finalMessage);
-            uiConsole.OutputBoard(_boardArray);
+            _uiConsole.OutputMessage(finalMessage);
+            _uiConsole.OutputBoard(_boardArray);
         }
         
         public int GetCurrentPlayer()
@@ -78,7 +82,7 @@ namespace TicTacToe
 
         private string HandleMoveInput(Move inputMove)
         {
-            if (GameRulesHandler.IsADuplicateMove(_boardArray, inputMove))
+            if (_rules.IsADuplicateMove(_boardArray, inputMove))
             {
                 return Constants.DuplicateMoveMessage;
             }
@@ -89,7 +93,7 @@ namespace TicTacToe
         
         private void UpdateGameStatus()   
         {
-            _gameStatus = GameRulesHandler.HasWon(_boardArray) ? GameStatus.Won : (GameRulesHandler.HasDrawn(_boardArray) ? GameStatus.Draw : (_givenUp ? GameStatus.Quit : GameStatus.Playing));
+            _gameStatus = _rules.HasWon(_boardArray) ? GameStatus.Won : (_rules.HasDrawn(_boardArray) ? GameStatus.Draw : (_givenUp ? GameStatus.Quit : GameStatus.Playing));
         }
     }
 }

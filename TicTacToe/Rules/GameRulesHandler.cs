@@ -1,26 +1,30 @@
 using System.Linq;
 
-namespace TicTacToe
+namespace TicTacToe.Rules
 {
-    public static class GameRulesHandler
+    public class GameRulesHandler : IRules
     {
-        public static bool IsADuplicateMove(int[,] boardArray, Move moveToCheck)
+        public GameRulesHandler()
+        {
+        }
+        
+        public bool IsADuplicateMove(int[,] boardArray, Move moveToCheck)
         {
             var (coordX, coordY) = moveToCheck.GetCoord();
             return boardArray[coordX, coordY] != Constants.EmptyCellValue;
         }
         
-        public static bool HasDrawn(int[,] boardArray)
+        public bool HasDrawn(int[,] boardArray)
         {
             return boardArray.Cast<int>().All(cell => cell != 0);
         }
         
-        public static bool HasWon(int[,] boardArray)
+        public bool HasWon(int[,] boardArray)
         {
             return IsARowWin(boardArray) || IsAColumnWin(boardArray) || IsADiagonalWin(boardArray);
         }
         
-        private static bool IsARowWin(int[,] boardArray)
+        private bool IsARowWin(int[,] boardArray)
         {
             for (var i = 0; i < boardArray.GetLength(0); i++)
             {
@@ -32,7 +36,7 @@ namespace TicTacToe
             return false;
         }
         
-        private static bool IsAColumnWin(int[,] boardArray)
+        private bool IsAColumnWin(int[,] boardArray)
         {
             for (var i = 0; i < boardArray.GetLength(1); i++)
             {
@@ -44,13 +48,13 @@ namespace TicTacToe
             return false;
         }
         
-        private static bool IsADiagonalWin(int[,] boardArray)
+        private bool IsADiagonalWin(int[,] boardArray)
         {
             return boardArray[1,1] != 0 && (CheckEquivalence(boardArray[1, 1], boardArray[2, 2],boardArray[0, 0]) 
                                             || CheckEquivalence(boardArray[1, 1], boardArray[2, 0], boardArray[0, 2]));
         }
 
-        private static bool CheckEquivalence(int a, int b, int c)
+        private bool CheckEquivalence(int a, int b, int c)
         {
             return (a == b) && (b == c);
         }

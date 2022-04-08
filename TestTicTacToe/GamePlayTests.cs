@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using TicTacToe;
+using TicTacToe.Rules;
 using Xunit;
 
 namespace TestTicTacToe
@@ -8,23 +9,27 @@ namespace TestTicTacToe
     public class GamePlayTests
     {
         private readonly StringWriter _stringWriter;
+        private readonly GamePlay _gamePlay;
 
         public GamePlayTests()
         { 
             _stringWriter = new StringWriter();
             Console.SetOut(_stringWriter);
+            
+            var rules = new GameRulesHandler();
+            var uiConsole = new UserInputConsole();
+            _gamePlay = new GamePlay(uiConsole, rules);
         }
         
         [Fact]
         public void Should_Change_Player_When_SwapPlayer_Is_Called()
         {
             // Arrange 
-            var game = new GamePlay();
             
             // Act
-            var initialPlayer = game.GetCurrentPlayer();
-            game.SwapPlayer();
-            var swappedPlayer = game.GetCurrentPlayer();
+            var initialPlayer = _gamePlay.GetCurrentPlayer();
+            _gamePlay.SwapPlayer();
+            var swappedPlayer = _gamePlay.GetCurrentPlayer();
 
             // Assert 
             Assert.NotEqual(initialPlayer, swappedPlayer);
@@ -35,13 +40,11 @@ namespace TestTicTacToe
         public void Should_Change_Player_To_The_Initial_Player_When_SwapPlayer_Is_Called_Twice()
         {
             // Arrange 
-            var game = new GamePlay();
-            
             // Act
-            var initialPlayer = game.GetCurrentPlayer();
-            game.SwapPlayer();
-            game.SwapPlayer();
-            var swappedPlayer = game.GetCurrentPlayer();
+            var initialPlayer = _gamePlay.GetCurrentPlayer();
+            _gamePlay.SwapPlayer();
+            _gamePlay.SwapPlayer();
+            var swappedPlayer = _gamePlay.GetCurrentPlayer();
 
             // Assert 
             Assert.Equal(initialPlayer, swappedPlayer);
@@ -54,14 +57,12 @@ namespace TestTicTacToe
             // Arrange
             var stringReader = new StringReader("q");
             Console.SetIn(stringReader);
-
-            var game = new GamePlay();
-            var expectedGameStatus = GameStatus.Quit;
+var expectedGameStatus = GameStatus.Quit;
             
             // Act
-            game.Play();
+            _gamePlay.Play();
             var actualString = _stringWriter.ToString();
-            var actualGameStatus = game.GetCurrentStatus();
+            var actualGameStatus = _gamePlay.GetCurrentStatus();
             
             // Assert
             Assert.Contains(Constants.GameQuitMessage, actualString);
@@ -74,9 +75,7 @@ namespace TestTicTacToe
             // Arrange
             var stringReader = new StringReader("1,1\nq");
             Console.SetIn(stringReader);
-
-            var game = new GamePlay();
-            var player = game.GetCurrentPlayer();
+var player = _gamePlay.GetCurrentPlayer();
             var expectedBoard = new [,]
             {
                 {player, 0, 0},
@@ -85,9 +84,9 @@ namespace TestTicTacToe
             };
             
             // Act
-            game.Play();
+            _gamePlay.Play();
             var actualString = _stringWriter.ToString();
-            var actualBoard = game.GetBoardArray();
+            var actualBoard = _gamePlay.GetBoardArray();
             
             // Assert
             Assert.Contains(Constants.MoveAcceptedMessage, actualString);
@@ -100,9 +99,7 @@ namespace TestTicTacToe
             // Arrange
             var stringReader = new StringReader("1,1\n1,2\nq");
             Console.SetIn(stringReader);
-
-            var game = new GamePlay();
-            var player = game.GetCurrentPlayer();
+var player = _gamePlay.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             var expectedBoard = new[,]
             {
@@ -112,8 +109,8 @@ namespace TestTicTacToe
             };
             
             // Act
-            game.Play();
-            var actualBoard = game.GetBoardArray();
+            _gamePlay.Play();
+            var actualBoard = _gamePlay.GetBoardArray();
             
             // Assert
             Assert.Equal(expectedBoard, actualBoard);
@@ -125,9 +122,7 @@ namespace TestTicTacToe
             // Arrange
             var stringReader = new StringReader("1,1\n1,1\nq");
             Console.SetIn(stringReader);
-
-            var game = new GamePlay();
-            var player = game.GetCurrentPlayer();
+var player = _gamePlay.GetCurrentPlayer();
             var expectedBoard = new[,]
             {
                 {player, 0, 0},
@@ -136,9 +131,9 @@ namespace TestTicTacToe
             };
     
             // Act
-            game.Play();
+            _gamePlay.Play();
             var actualString = _stringWriter.ToString();
-            var actualBoard = game.GetBoardArray();
+            var actualBoard = _gamePlay.GetBoardArray();
     
             // Assert
             Assert.Contains(Constants.DuplicateMoveMessage, actualString);
@@ -151,9 +146,7 @@ namespace TestTicTacToe
             // Arrange
             var stringReader = new StringReader("1,1\n1,2\n2,1\n2,2\n3,1\n");
             Console.SetIn(stringReader);
-
-            var game = new GamePlay();
-            var player = game.GetCurrentPlayer();
+var player = _gamePlay.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             
             var expectedBoard = new [,]
@@ -166,10 +159,10 @@ namespace TestTicTacToe
             var expectedGameStatus = GameStatus.Won;
     
             // Act
-            game.Play();
+            _gamePlay.Play();
             var actualString = _stringWriter.ToString();
-            var actualBoard = game.GetBoardArray();
-            var actualGameStatus = game.GetCurrentStatus();
+            var actualBoard = _gamePlay.GetBoardArray();
+            var actualGameStatus = _gamePlay.GetCurrentStatus();
     
             // Assert
             Assert.Contains(Constants.GameWonMessage, actualString);
@@ -183,9 +176,7 @@ namespace TestTicTacToe
             // Arrange
             var stringReader = new StringReader("1,1\n1,2\n1,3\n2,1\n2,3\n2,2\n3,1\n3,3\n3,2\n");
             Console.SetIn(stringReader);
-
-            var game = new GamePlay();
-            var player = game.GetCurrentPlayer();
+var player = _gamePlay.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             
             var expectedBoard = new [,]
@@ -198,10 +189,10 @@ namespace TestTicTacToe
             var expectedGameStatus = GameStatus.Draw;
     
             // Act
-            game.Play();
+            _gamePlay.Play();
             var actualString = _stringWriter.ToString();
-            var actualBoard = game.GetBoardArray();
-            var actualGameStatus = game.GetCurrentStatus();
+            var actualBoard = _gamePlay.GetBoardArray();
+            var actualGameStatus = _gamePlay.GetCurrentStatus();
     
             // Assert
             Assert.Contains(Constants.GameDrawnMessage, actualString);
@@ -215,9 +206,7 @@ namespace TestTicTacToe
             // Arrange
             var stringReader = new StringReader("1,1\n1,2\nq");
             Console.SetIn(stringReader);
-
-            var game = new GamePlay();
-            var player = game.GetCurrentPlayer();
+var player = _gamePlay.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             var expectedBoard = new[,]
             {
@@ -231,8 +220,8 @@ namespace TestTicTacToe
             const string expectedBoardOutputAfterSecondMove = "X O . \n. . . \n. . . \n";
             
             // Act
-            game.Play();
-            var actualBoard = game.GetBoardArray();
+            _gamePlay.Play();
+            var actualBoard = _gamePlay.GetBoardArray();
             var actualBoardOutputs = _stringWriter.ToString();
 
             // Assert
@@ -248,9 +237,7 @@ namespace TestTicTacToe
             // Arrange
             var stringReader = new StringReader("1,1\n1,2\n2,1\n2,2\n3,1\n");
             Console.SetIn(stringReader);
-
-            var game = new GamePlay();
-            var player = game.GetCurrentPlayer();
+var player = _gamePlay.GetCurrentPlayer();
             var otherPlayer = player == Constants.PlayerOValue ? Constants.PlayerXValue : Constants.PlayerOValue;
             var expectedBoard = new [,]
             {
@@ -262,8 +249,8 @@ namespace TestTicTacToe
             const string expectedBoardOutputAfterWinning = "X O . \nX O . \nX . . \n";
             
             // Act
-            game.Play();
-            var actualBoard = game.GetBoardArray();
+            _gamePlay.Play();
+            var actualBoard = _gamePlay.GetBoardArray();
             var actualBoardOutputs = _stringWriter.ToString();
 
             // Assert

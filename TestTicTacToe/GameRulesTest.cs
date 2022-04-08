@@ -1,13 +1,18 @@
-using System;
 using System.Collections.Generic;
 using TicTacToe;
+using TicTacToe.Rules;
 using Xunit;
 
 namespace TestTicTacToe
 {
     public class GameRulesTest
     {
-
+        private readonly IRules _rules;
+        public GameRulesTest()
+        {
+            _rules = new GameRulesHandler();
+        }
+        
         public static IEnumerable<object[]> GetInProgressBoards()
         {
             yield return new object[]
@@ -53,7 +58,7 @@ namespace TestTicTacToe
         public void Should_Return_False_When_Player_Has_Not_Won_The_Game(int[,] gameInProgressBoard)
         {
             // Act
-            var isWonGame = GameRulesHandler.HasWon(gameInProgressBoard);
+            var isWonGame = _rules.HasWon(gameInProgressBoard);
         
             // Assert
             Assert.False(isWonGame);
@@ -105,7 +110,7 @@ namespace TestTicTacToe
         public void Should_Return_True_When_Player_Has_Won_The_Game(int[,] gameWonBoard)
         {
             // Act
-            var isWonGame = GameRulesHandler.HasWon(gameWonBoard);
+            var isWonGame = _rules.HasWon(gameWonBoard);
         
             // Assert
             Assert.True(isWonGame);
@@ -123,7 +128,7 @@ namespace TestTicTacToe
             };
         
             // Act
-            var hasDrawnGame = GameRulesHandler.HasDrawn(gameInProgressBoard);
+            var hasDrawnGame = _rules.HasDrawn(gameInProgressBoard);
         
             // Assert
             Assert.False(hasDrawnGame);
@@ -141,7 +146,7 @@ namespace TestTicTacToe
             };
         
             // Act
-            var hasDrawnGame = GameRulesHandler.HasDrawn(gameDrawnBoard);
+            var hasDrawnGame = _rules.HasDrawn(gameDrawnBoard);
         
             // Assert
             Assert.True(hasDrawnGame);
@@ -161,7 +166,7 @@ namespace TestTicTacToe
             var duplicateMove = new Move(0, 0);
         
             // Act
-            var isDuplicateMove = GameRulesHandler.IsADuplicateMove(gameBoard, duplicateMove);
+            var isDuplicateMove = _rules.IsADuplicateMove(gameBoard, duplicateMove);
         
             // Assert
             Assert.True(isDuplicateMove);
