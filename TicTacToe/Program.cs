@@ -1,4 +1,4 @@
-﻿using System;
+﻿using TicTacToe.Rules;
 
 namespace TicTacToe
 {
@@ -6,7 +6,11 @@ namespace TicTacToe
     {
         static void Main()
         {
-            Console.WriteLine("Hello, World!");
+            var rules = new GameRulesHandler();
+            var userInput = new UserInputConsole();
+            
+            var game = new GamePlay(userInput, rules);
+            game.Play();
         }
         
     }
